@@ -251,7 +251,7 @@ public class Menu {
 
     public String checkEmployeeId() {
         String id = string();
-        for (Client o : ControllerManager.getInstance().getClients()) {
+        for (Person o : ControllerManager.getInstance().getEmployees()) {
             while (true) {
                 if (o.getId().equals(id)) {
                     System.out.println("Trùng id ! Vui lòng nhập lại");
