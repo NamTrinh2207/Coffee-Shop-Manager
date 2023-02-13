@@ -21,7 +21,6 @@ public class Menu {
                     +----------LOGIN-----------+
                     |      1. Đăng nhập        |
                     |      0. Thoát            |
-                    |                          |
                     +--------------------------+
                     """);
             System.out.print("Lựa chọn: ");
@@ -111,7 +110,7 @@ public class Menu {
     }
 
     public Client addClient() {
-        String id = duplicateCheck();
+        String id = checkCustomerId();
         System.out.print("Nhập tên khách hàng:");
         String name = string();
         System.out.print("Nhập tuổi khách hàng :");
@@ -136,7 +135,7 @@ public class Menu {
         return new Client(id, name, age, address, phone, products);
     }
 
-    public String duplicateCheck() {
+    public String checkCustomerId() {
         System.out.print("Nhập mã khách hàng:");
         String id = string();
         for (Client o : ControllerManager.getInstance().getClients()) {
@@ -158,7 +157,7 @@ public class Menu {
             System.out.println("""
                     +---------------QUẢN LÝ NHÂN VIÊN---------------+
                     |   1. Thêm nhân viên                           |
-                    |   2. Sắp xếp danh sách nhân viên theo tên     |        \s
+                    |   2. Sắp xếp danh sách nhân viên theo tên     |
                     |   3. Danh sách nhân viên                      |
                     |   4. Sửa thông tin nhân viên                  |
                     |   5. Xóa nhân viên                            |
@@ -196,7 +195,7 @@ public class Menu {
         switch (checkInput) {
             case 1 -> {
                 System.out.print("Mời bạn nhập mã nhân viên  : ");
-                String id = string();
+                String id = checkEmployeeId();
                 System.out.print("Mời bạn nhập tên nhân viên : ");
                 String name = string();
                 System.out.print("Mời bạn nhập tuổi nhân viên : ");
@@ -215,7 +214,7 @@ public class Menu {
             }
             case 2 -> {
                 System.out.print("Mời bạn nhập mã nhân viên  : ");
-                String id = string();
+                String id = checkEmployeeId();
                 System.out.print("Mời bạn nhập tên nhân viên : ");
                 String name = string();
                 System.out.print("Mời bạn nhập tuổi nhân viên : ");
@@ -248,6 +247,21 @@ public class Menu {
         System.out.print("Nhập tiền phạt:  ");
         int punish = checkInt();
         System.out.println(controllerManager.salaryEmployee(checkId, bonus, punish));
+    }
+
+    public String checkEmployeeId() {
+        String id = string();
+        for (Client o : ControllerManager.getInstance().getClients()) {
+            while (true) {
+                if (o.getId().equals(id)) {
+                    System.out.println("Trùng id ! Vui lòng nhập lại");
+                    id = input.nextLine();
+                } else {
+                    break;
+                }
+            }
+        }
+        return id;
     }
 
     //check input-------------------------------------------------------------------------------------------------
