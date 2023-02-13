@@ -3,7 +3,6 @@ package views;
 import controller.ControllerManager;
 import controller.LoginController;
 import model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +16,7 @@ public class Menu {
     //Login--------------------------------------------------------------------------------------------------
     public void clubCoffee() {
         while (true) {
-            showMessage("""
+            showMessageErr("""
                     +----------LOGIN-----------+
                     |      1. Đăng nhập        |
                     |      0. Thoát            |
@@ -31,7 +30,7 @@ public class Menu {
                     menu();
                 }
                 case 0 -> {
-                    showMessage("Goodbye");
+                    showMessageErr("Goodbye");
                     System.exit(checkInput);
                 }
             }
@@ -41,7 +40,7 @@ public class Menu {
 
     public void menu() {
         while (true) {
-            showMessage("""
+            showMessageErr("""
                     +--------------- CLUB COFFEE -------------+
                     |        1. Quản lý nhân viên             |
                     |        2. Quản lý khách hàng            |
@@ -57,10 +56,10 @@ public class Menu {
             } else if (checkInput == 2) {
                 menuClient();
             } else if (checkInput == 3) {
-                showMessage("successful logout");
+                showMessageErr("successful logout");
                 clubCoffee();
             } else if (checkInput == 0) {
-                showMessage("Goodbye");
+                showMessageErr("Goodbye");
                 System.exit(checkInput);
             }
         }
@@ -81,7 +80,7 @@ public class Menu {
 
     public void menuClient() {
         while (true) {
-            showMessage("""
+            showMessageErr("""
                     +--------------- QUẢN LÝ HÓA ĐƠN ---------------+
                     |    1. Thêm khách hàng                         |
                     |    2. Danh sách khách mua hàng                |
@@ -99,14 +98,14 @@ public class Menu {
                 case 3 -> prepareInvoice();
                 case 4 -> {
                     controllerManager.sortClient();
-                    showMessage("successful arrangement");
+                    showMessageErr("successful arrangement");
                 }
                 case 5 -> {
-                    showMessage("successful logout");
+                    showMessageErr("successful logout");
                     menu();
                 }
                 case 0 -> {
-                    showMessage("Goodbye");
+                    showMessageErr("Goodbye");
                     System.exit(checkInput);
                 }
                 default -> showMessageErr("Vui lòng chọn theo đúng menu");
@@ -165,7 +164,7 @@ public class Menu {
     //Display Employee--------------------------------------------------------------------------------------------------
     public void menuEmployee() {
         while (true) {
-            showMessage("""
+            showMessageErr("""
                     +---------------QUẢN LÝ NHÂN VIÊN---------------+
                     |   1. Thêm nhân viên                           |
                     |   2. Sắp xếp danh sách nhân viên theo tên     |
@@ -184,7 +183,7 @@ public class Menu {
                 case 1 -> controllerManager.addNewEmployee(addEmployee());
                 case 2 -> {
                     controllerManager.sortEmployees();
-                    showMessage("successful arrangement");
+                    showMessageErr("successful arrangement");
                 }
                 case 3 -> controllerManager.displayEmployees();
                 case 4 -> controllerManager.editEmployee(input);
@@ -192,11 +191,11 @@ public class Menu {
                 case 6 -> System.out.println(controllerManager.totalSalaryAllEmployees());
                 case 7 -> salaryEmployee();
                 case 8 -> {
-                    showMessage("successful logout");
+                    showMessageErr("successful logout");
                     menu();
                 }
                 case 0 -> {
-                    showMessage("Goodbye");
+                    showMessageErr("Goodbye");
                     System.exit(checkInput);
                 }
                 default -> showMessageErr("Vui lòng nhập lại!!!");
@@ -205,12 +204,12 @@ public class Menu {
     }
 
     public Person addEmployee() {
-        showMessage("""
+        showMessageErr("""
                 Thêm nhân viên mới :
                 1. nhân viên full time
                 2. nhân viên part time
                 0. Quay lại""");
-        System.out.print("Lựa chọn: ");
+        showMessage("Lựa chọn: ");
         checkInput = Integer.parseInt(input.nextLine());
         switch (checkInput) {
             case 1 -> {
@@ -252,21 +251,28 @@ public class Menu {
     }
 
     public void deleteEmployee() {
-        if (controllerManager.getEmployees().isEmpty()){
+        if (controllerManager.getEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
-        }else {
-           showMessage("Nhập id nhân viên muốn xóa: ");
+        } else {
+            showMessage("Nhập id nhân viên muốn xóa: ");
             checkId = string();
             controllerManager.deleteByEmploy(checkId);
         }
     }
 
     public void salaryEmployee() {
-        if (controllerManager.getEmployees().isEmpty()){
+        if (controllerManager.getEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
-        }else {
+        } else {
             showMessage("Nhập id nhân viên muốn tính lương:  ");
             checkId = string();
+            for (Person o : controllerManager.getEmployees()
+            ) {
+                if (!checkId.equals(o.getId())) {
+                    showMessageErr("Không tìm thấy id nhân viên tương ứng");
+                    break;
+                }
+            }
             showMessageErr("Số ngày nghỉ (Ngày):  ");
             double unpaidLeave = checkInt();
             showMessageErr("Đi muộn (ngày/tháng):  ");
@@ -317,11 +323,13 @@ public class Menu {
             return -1;
         }
     }
+
     public void showMessage(String msg) {
         System.out.print(msg);
     }
+
     public void showMessageErr(String msg) {
-        System.err.println(msg);
+        System.err.print(msg);
     }
 }
 

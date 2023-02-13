@@ -59,6 +59,8 @@ public class ControllerManager {
             if (id.equals(o.getId())) {
                 employees.remove(o);
                 break;
+            } else {
+                System.err.println("không có id nào của nhân viên trùng với " + id + " bạn vừa nhập");
             }
         }
         ReadWriteToFile.getInstance().writeToFileEmployees(employees);
@@ -76,7 +78,7 @@ public class ControllerManager {
                 if (clients.size() > 0) {
                     clients.remove(p);
                 }
-            }else {
+            } else {
                 return "Không tìm thấy thông tin khách hàng";
             }
         }
