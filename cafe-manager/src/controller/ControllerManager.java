@@ -2,18 +2,17 @@ package controller;
 
 import model.*;
 import storage.ReadWriteToFile;
-
 import java.util.*;
 
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
-    private static ControllerManager instance = null;
-    List<Client> clients;
-    List<Person> employees;
+    private static ControllerManager instance;
+    private final List<Client> clients;
+    private final List<Person> employees;
 
     private ControllerManager() {
-        this.clients = ReadWriteToFile.readDataFileClient();
-        this.employees = ReadWriteToFile.readDataFileEmployees();
+        this.clients = ReadWriteToFile.getInstance().readDataFileClient();
+        this.employees = ReadWriteToFile.getInstance().readDataFileEmployees();
     }
 
     public static ControllerManager getInstance() {
@@ -23,35 +22,23 @@ public class ControllerManager {
         return instance;
     }
 
-    public static void setInstance(ControllerManager instance) {
-        ControllerManager.instance = instance;
-    }
-
     public List<Client> getClients() {
         return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
     }
 
     public List<Person> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Person> employees) {
-        this.employees = employees;
-    }
-
     //CRUD Client------------------------------------------------------------------------------------
     public void addNewClient(Client client) {
-        instance.getClients().add(client);
-        ReadWriteToFile.writeToFileClient(clients);
+        instance.clients.add(client);
+        ReadWriteToFile.getInstance().writeToFileClient(clients);
     }
 
     public void addNewEmployee(Person employee) {
-        instance.getEmployees().add(employee);
-        ReadWriteToFile.writeToFileEmployees(employees);
+        instance.employees.add(employee);
+        ReadWriteToFile.getInstance().writeToFileEmployees(employees);
     }
 
     public void display() {
@@ -73,7 +60,7 @@ public class ControllerManager {
                 break;
             }
         }
-        ReadWriteToFile.writeToFileEmployees(employees);
+        ReadWriteToFile.getInstance().writeToFileEmployees(employees);
     }
 
     public Object totalMoney(String id) {
@@ -91,7 +78,7 @@ public class ControllerManager {
             }
         }
         if (clients != null) {
-            ReadWriteToFile.writeToFileClient(clients);
+            ReadWriteToFile.getInstance().writeToFileClient(clients);
         }
         return sb;
     }
@@ -103,7 +90,7 @@ public class ControllerManager {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        ReadWriteToFile.writeToFileClient(clients);
+        ReadWriteToFile.getInstance().writeToFileClient(clients);
     }
 
     public void editEmployee(Scanner input) {
@@ -217,7 +204,7 @@ public class ControllerManager {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        ReadWriteToFile.writeToFileEmployees(employees);
+        ReadWriteToFile.getInstance().writeToFileClient(clients);
     }
 
 }
