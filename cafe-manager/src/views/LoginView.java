@@ -2,7 +2,7 @@ package views;
 import model.LoginModel;
 import java.util.Scanner;
 public class LoginView {
-    public static Scanner input = new Scanner(System.in);
+    public Scanner input = new Scanner(System.in);
     public void showMessageOK(String msg) {
         System.out.println(msg);
     }

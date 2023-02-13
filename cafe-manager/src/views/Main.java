@@ -1,6 +1,7 @@
 package views;
 public class Main {
     public static void main(String[] args) {
-        Menu.clubCoffee();
+        Menu menu = new Menu();
+        menu.clubCoffee();
     }
 }

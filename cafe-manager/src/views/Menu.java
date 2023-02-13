@@ -1,7 +1,9 @@
 package views;
+
 import controller.ControllerManager;
 import controller.LoginController;
 import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,16 +11,18 @@ import java.util.Scanner;
 public class Menu {
     public static ControllerManager controllerManager = ControllerManager.getInstance();
     public static Scanner input = new Scanner(System.in);
-    public static int checkInput;
-    public static String checkId;
+    public int checkInput;
+    public String checkId;
 
     //Login--------------------------------------------------------------------------------------------------
-    public static void clubCoffee() {
+    public void clubCoffee() {
         while (true) {
             System.out.println("""
-                    -----------LOGIN----------
-                    1. Đăng nhập
-                    0. Thoát
+                    +----------LOGIN-----------+
+                    |      1. Đăng nhập        |
+                    |      0. Thoát            |
+                    |                          |
+                    +--------------------------+
                     """);
             System.out.print("Lựa chọn: ");
             checkInput = checkInt();
@@ -33,7 +37,7 @@ public class Menu {
 
     }
 
-    public static void menu() {
+    public void menu() {
         while (true) {
             System.out.println("""
                     +--------------- CLUB COFFEE -------------+
@@ -52,26 +56,26 @@ public class Menu {
                 menuClient();
             } else if (checkInput == 3) {
                 clubCoffee();
-            }else if (checkInput == 0){
+            } else if (checkInput == 0) {
                 System.exit(checkInput);
             }
         }
     }
 
-    public static void userLogin() {
+    public void userLogin() {
         LoginView view = new LoginView();
         LoginController control = new LoginController(view);
         control.userLogin();
     }
 
-    public static void adminLogin() {
+    public void adminLogin() {
         LoginView view = new LoginView();
         LoginController control = new LoginController(view);
         control.AdminLogin();
     }
     //Client----------------------------------------------------------------------
 
-    public static void menuClient() {
+    public void menuClient() {
         while (true) {
             System.out.println("""
                     +--------------- QUẢN LÝ HÓA ĐƠN ---------------+
@@ -100,15 +104,14 @@ public class Menu {
         }
     }
 
-    public static void prepareInvoice() {
+    public void prepareInvoice() {
         System.out.print("Nhập id khách hàng muốn tính tiền: ");
         checkId = string();
         System.out.println(controllerManager.totalMoney(checkId));
     }
 
-    public static Client addClient() {
-        System.out.print("Nhập mã khách hàng:");
-        String id = string();
+    public Client addClient() {
+        String id = duplicateCheck();
         System.out.print("Nhập tên khách hàng:");
         String name = string();
         System.out.print("Nhập tuổi khách hàng :");
@@ -117,8 +120,6 @@ public class Menu {
         String address = string();
         System.out.print("Nhập sđt:");
         String phone = string();
-        System.out.print("Nhập email:");
-        String email = string();
         System.out.println("Nhập số lượng cà phê khách hàng mua:");
         int sp = checkInt();
         List<Product> products = new ArrayList<>();
@@ -132,11 +133,27 @@ public class Menu {
             double quantity = checkDouble();
             products.add(new Product(nameSP, price, quantity));
         }
-        return new Client(id, name, age, address, phone, email, products);
+        return new Client(id, name, age, address, phone, products);
+    }
+
+    public String duplicateCheck() {
+        System.out.print("Nhập mã khách hàng:");
+        String id = string();
+        for (Client o : ControllerManager.getInstance().getClients()) {
+            while (true) {
+                if (o.getId().equals(id)) {
+                    System.out.println("Trùng id ! Vui lòng nhập lại");
+                    id = input.nextLine();
+                } else {
+                    break;
+                }
+            }
+        }
+        return id;
     }
 
     //Display Employee--------------------------------------------------------------------------------------------------
-    public static void menuEmployee() {
+    public void menuEmployee() {
         while (true) {
             System.out.println("""
                     +---------------QUẢN LÝ NHÂN VIÊN---------------+
@@ -168,7 +185,7 @@ public class Menu {
         }
     }
 
-    public static Person addEmployee() {
+    public Person addEmployee() {
         System.out.println("""
                 Thêm nhân viên mới :
                 1. nhân viên full time
@@ -207,11 +224,9 @@ public class Menu {
                 String address = string();
                 System.out.print("Mời bạn nhập sđt nhân viên : ");
                 String phone = string();
-                System.out.print("Mời bạn nhập email nhân viên : ");
-                String email = string();
                 System.out.print("Mời bạn nhập số giờ làm việc : ");
                 double workingTimes = checkInt();
-                return new PartTimeEmployee(id, name, age, address, phone, email, workingTimes);
+                return new PartTimeEmployee(id, name, age, address, phone, workingTimes);
             }
             case 0 -> menuEmployee();
             default -> System.err.println("Nhập dữ liệu không đúng !!");
@@ -219,13 +234,13 @@ public class Menu {
         return null;
     }
 
-    public static void deleteEmployee() {
+    public void deleteEmployee() {
         System.out.print("Nhập id nhân viên muốn xóa: ");
         checkId = string();
         controllerManager.deleteByEmploy(checkId);
     }
 
-    public static void salaryEmployee() {
+    public void salaryEmployee() {
         System.out.print("Nhập id nhân viên muốn tính lương:  ");
         checkId = string();
         System.out.print("Nhập tiền thưởng:  ");
@@ -236,7 +251,7 @@ public class Menu {
     }
 
     //check input-------------------------------------------------------------------------------------------------
-    public static String string() {
+    public String string() {
         try {
             return input.nextLine();
         } catch (Exception e) {
@@ -245,7 +260,7 @@ public class Menu {
         }
     }
 
-    public static int checkInt() {
+    public int checkInt() {
         try {
             return Integer.parseInt(input.nextLine());
         } catch (Exception e) {
@@ -254,7 +269,7 @@ public class Menu {
         }
     }
 
-    public static double checkDouble() {
+    public double checkDouble() {
         try {
             return Double.parseDouble(input.nextLine());
         } catch (Exception e) {
