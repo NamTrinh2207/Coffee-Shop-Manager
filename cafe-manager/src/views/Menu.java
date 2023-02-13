@@ -16,7 +16,7 @@ public class Menu {
     public static void clubCoffee() {
         while (true) {
             System.out.println("""
-                    ----------LOGIN----------
+                    -----------LOGIN----------
                     1. Đăng nhập
                     0. Thoát
                     """);
@@ -36,10 +36,12 @@ public class Menu {
     public static void menu() {
         while (true) {
             System.out.println("""
-                    --------------CLUB COFFEE--------------
-                    1. Quản lý nhân viên (Dành cho quản lý)
-                    2. Quản lý khách hàng
-                    0. Đăng xuất
+                    +--------------- CLUB COFFEE -------------+
+                    |        1. Quản lý nhân viên             |
+                    |        2. Quản lý khách hàng            |
+                    |        3. Đăng xuất                     |
+                    |        0. Thoát                         |
+                    +-----------------------------------------+
                     """);
             System.out.print("Lựa chọn: ");
             checkInput = checkInt();
@@ -48,8 +50,10 @@ public class Menu {
                 menuEmployee();
             } else if (checkInput == 2) {
                 menuClient();
-            } else if (checkInput == 0) {
+            } else if (checkInput == 3) {
                 clubCoffee();
+            }else if (checkInput == 0){
+                System.exit(checkInput);
             }
         }
     }
@@ -70,13 +74,14 @@ public class Menu {
     public static void menuClient() {
         while (true) {
             System.out.println("""
-                    -------------QUẢN LÝ KHÁCH HÀNG------------
-                    1. Thêm khách hàng
-                    2. Danh sách khách mua hàng
-                    3. Tính tiền theo id khách hàng
-                    4. Sắp xếp theo tên khách hàng
-                    5. Đăng xuất
-                    0. Thoát
+                    +--------------- QUẢN LÝ HÓA ĐƠN ---------------+
+                    |    1. Thêm khách hàng                         |
+                    |    2. Danh sách khách mua hàng                |
+                    |    3. Tính tiền theo id khách hàng            |
+                    |    4. Sắp xếp theo tên khách hàng             |
+                    |    5. Đăng xuất                               |
+                    |    0. Thoát                                   |
+                    +-----------------------------------------------+
                     """);
             System.out.print("Lựa chọn: ");
             checkInput = checkInt();
@@ -134,16 +139,17 @@ public class Menu {
     public static void menuEmployee() {
         while (true) {
             System.out.println("""
-                    ----------QUẢN LÝ NHÂN VIÊN----------
-                    1. Thêm nhân viên
-                    2. Sắp xếp danh sách nhân viên theo tên
-                    3. Danh sách nhân viên
-                    4. Sửa thông tin nhân viên
-                    5. Xóa nhân viên
-                    6. Tổng lương của tất cả nhân viên
-                    7. Tính lương nhân viên
-                    8. Đăng xuất
-                    0. Thoát
+                    +---------------QUẢN LÝ NHÂN VIÊN---------------+
+                    |   1. Thêm nhân viên                           |
+                    |   2. Sắp xếp danh sách nhân viên theo tên     |        \s
+                    |   3. Danh sách nhân viên                      |
+                    |   4. Sửa thông tin nhân viên                  |
+                    |   5. Xóa nhân viên                            |
+                    |   6. Tổng lương của tất cả nhân viên          |
+                    |   7. Tính lương nhân viên                     |
+                    |   8. Đăng xuất                                |
+                    |   0. Thoát                                    |
+                    +-----------------------------------------------+
                     """);
             System.out.print("Lựa chọn: ");
             checkInput = checkInt();
@@ -168,6 +174,7 @@ public class Menu {
                 1. nhân viên full time
                 2. nhân viên part time
                 0. Quay lại""");
+        System.out.print("Lựa chọn: ");
         checkInput = Integer.parseInt(input.nextLine());
         switch (checkInput) {
             case 1 -> {
