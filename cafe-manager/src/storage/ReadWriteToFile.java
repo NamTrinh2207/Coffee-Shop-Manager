@@ -2,14 +2,22 @@ package storage;
 
 import model.Client;
 import model.Person;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadWriteToFile {
     //Clients-------------------------------------------------------------------------
-    public static void writeToFileClient(List<Client> clients) {
+    private ReadWriteToFile(){
+    }
+    private static ReadWriteToFile instance;
+    public static ReadWriteToFile getInstance(){
+        if (instance==null) {
+            instance = new ReadWriteToFile();
+        }
+        return instance;
+    }
+    public void writeToFileClient(List<Client> clients) {
         File file = new File("client.dat");
         FileOutputStream stream;
         try {
@@ -31,7 +39,7 @@ public class ReadWriteToFile {
             throw new RuntimeException(e);
         }
     }
-    public static List<Client> readDataFileClient() {
+    public List<Client> readDataFileClient() {
         File file = new File("client.dat");
         List<Client> clients = new ArrayList<>();
         FileInputStream stream;
@@ -52,7 +60,7 @@ public class ReadWriteToFile {
         return clients;
     }
     //Employees-------------------------------------------------------------------------
-    public static void writeToFileEmployees(List<Person> employees) {
+    public void writeToFileEmployees(List<Person> employees) {
         File file = new File("employee.dat");
         FileOutputStream stream;
         try {
@@ -75,7 +83,7 @@ public class ReadWriteToFile {
         }
     }
 
-    public static List<Person> readDataFileEmployees() {
+    public List<Person> readDataFileEmployees() {
         File file = new File("employee.dat");
         List<Person> employees = new ArrayList<>();
         FileInputStream stream;
