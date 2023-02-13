@@ -9,8 +9,8 @@ public class Client extends Person {
         product = new ArrayList<>();
     }
 
-    public Client(String id, String name, int age, String address, String phoneNumber, String email, List<Product> product) {
-        super(id, name, age, address, phoneNumber, email);
+    public Client(String id, String name, int age, String address, String phoneNumber, List<Product> product) {
+        super(id, name, age, address, phoneNumber);
         this.product = product;
     }
 
@@ -30,7 +30,7 @@ public class Client extends Person {
                 "  Tuổi : " + getAge() +
                 "  Địa chỉ : " + getAddress() +
                 "  Số ĐT : " + getPhoneNumber() +
-                "  Email : " + getEmail() + "\n" + product;
+                "\n" + product;
     }
 
     @Override

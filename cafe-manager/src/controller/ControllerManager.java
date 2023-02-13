@@ -1,18 +1,18 @@
 package controller;
-
 import model.*;
 import storage.ReadWriteToFile;
+
 import java.util.*;
 
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
-    private final List<Client> clients;
-    private final List<Person> employees;
+    private static List<Client> clients;
+    private static List<Person> employees;
 
     private ControllerManager() {
-        this.clients = ReadWriteToFile.getInstance().readDataFileClient();
-        this.employees = ReadWriteToFile.getInstance().readDataFileEmployees();
+        clients = ReadWriteToFile.getInstance().readDataFileClient();
+        employees = ReadWriteToFile.getInstance().readDataFileEmployees();
     }
 
     public static ControllerManager getInstance() {
@@ -32,12 +32,12 @@ public class ControllerManager {
 
     //CRUD Client------------------------------------------------------------------------------------
     public void addNewClient(Client client) {
-        instance.clients.add(client);
+        clients.add(client);
         ReadWriteToFile.getInstance().writeToFileClient(clients);
     }
 
     public void addNewEmployee(Person employee) {
-        instance.employees.add(employee);
+        employees.add(employee);
         ReadWriteToFile.getInstance().writeToFileEmployees(employees);
     }
 
@@ -117,7 +117,7 @@ public class ControllerManager {
                     address = input.nextLine();
                     System.out.print("Mời bạn nhập sđt nhân viên : ");
                     newPhone = input.nextLine();
-                    System.out.print("Mời bạn nhập sđt nhân viên : ");
+                    System.out.print("Mời bạn nhập email nhân viên : ");
                     newEmail = input.nextLine();
                     System.out.print("Mời bạn nhập lương cứng nhân viên : ");
                     newHardSalary = Double.parseDouble(input.nextLine());
@@ -128,7 +128,7 @@ public class ControllerManager {
                     e.setAge(newAge);
                     e.setAddress(address);
                     e.setPhoneNumber(newPhone);
-                    e.setEmail(newEmail);
+                    ((FullTimeEmployee) e).setEmail(newEmail);
                     ((FullTimeEmployee) e).setWorkingDays(newWorkingDays);
                     ((FullTimeEmployee) e).setHardSalary(newHardSalary);
                 } else if (e instanceof PartTimeEmployee) {
@@ -142,16 +142,13 @@ public class ControllerManager {
                     address = input.nextLine();
                     System.out.print("Mời bạn nhập sđt nhân viên : ");
                     newPhone = input.nextLine();
-                    System.out.print("Mời bạn nhập sđt nhân viên : ");
-                    newEmail = input.nextLine();
                     System.out.print("Mời bạn nhập số giờ làm việc : ");
                     double newWorkTime = Integer.parseInt(input.nextLine());
                     e.setId(newId);
                     e.setName(newName);
                     e.setAge(newAge);
                     e.setAddress(address);
-                    e.setEmail(newPhone);
-                    e.setEmail(newEmail);
+                    e.setPhoneNumber(newPhone);
                     ((PartTimeEmployee) e).setWorkingTimes(newWorkTime);
                 }
             }

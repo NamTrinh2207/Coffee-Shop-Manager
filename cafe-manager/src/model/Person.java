@@ -8,18 +8,16 @@ public abstract class Person implements CalculateTheAmount, Serializable, Compar
     private int age;
     private String address;
     private String phoneNumber;
-    private String email;
 
     public Person() {
     }
 
-    public Person(String id, String name, int age, String address, String phoneNumber, String email) {
+    public Person(String id, String name, int age, String address, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.email = email;
     }
 
     public String getId() {
@@ -62,14 +60,6 @@ public abstract class Person implements CalculateTheAmount, Serializable, Compar
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getFullName() {
         String name = this.getName().trim();
         if (name.indexOf(" ") >= 0) {
@@ -95,7 +85,6 @@ public abstract class Person implements CalculateTheAmount, Serializable, Compar
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 

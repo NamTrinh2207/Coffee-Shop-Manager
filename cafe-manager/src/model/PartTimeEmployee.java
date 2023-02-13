@@ -9,8 +9,8 @@ public class PartTimeEmployee extends Person implements Serializable {
     public PartTimeEmployee() {
     }
 
-    public PartTimeEmployee(String id, String name, int age, String address, String phoneNumber, String email, double workingTimes) {
-        super(id, name, age, address, phoneNumber, email);
+    public PartTimeEmployee(String id, String name, int age, String address, String phoneNumber, double workingTimes) {
+        super(id, name, age, address, phoneNumber);
         this.workingTimes = workingTimes;
         this.hourlyMoney = 5000;
     }
@@ -39,7 +39,6 @@ public class PartTimeEmployee extends Person implements Serializable {
                 "  Tuổi : " + getAge() +
                 "  Địa chỉ : " + getAddress() +
                 "  Số ĐT : " + getPhoneNumber() +
-                "  Email : " + getEmail() +
                 "  Thời gian làm việc : " + workingTimes;
     }
     public double realFieldPartTime(int bonus, int punish) {

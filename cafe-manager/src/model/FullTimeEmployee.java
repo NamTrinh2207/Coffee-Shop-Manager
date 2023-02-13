@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class FullTimeEmployee extends Person implements Serializable {
+    private String email;
     private double hardSalary;
     private double workingDays;
 
@@ -10,7 +11,8 @@ public class FullTimeEmployee extends Person implements Serializable {
     }
 
     public FullTimeEmployee(String id, String name, int age, String address, String phoneNumber, String email, double hardSalary, double workingDays) {
-        super(id, name, age, address, phoneNumber, email);
+        super(id, name, age, address, phoneNumber);
+        this.email = email;
         this.hardSalary = hardSalary;
         this.workingDays = workingDays;
     }
@@ -31,6 +33,14 @@ public class FullTimeEmployee extends Person implements Serializable {
         this.workingDays = workingDays;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Nhân viên full time: " +
@@ -39,7 +49,7 @@ public class FullTimeEmployee extends Person implements Serializable {
                 "  Tuổi : " + getAge() +
                 "  Địa chỉ : " + getAddress() +
                 "  Số ĐT : " + getPhoneNumber() +
-                "  Email : " + getEmail() +
+                "  Email : " + email +
                 "  Lương cứng : " + hardSalary +
                 "  Ngày công : " + workingDays;
     }
