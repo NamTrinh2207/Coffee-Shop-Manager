@@ -30,7 +30,10 @@ public class Menu {
                     userLogin();
                     menu();
                 }
-                case 0 -> System.exit(checkInput);
+                case 0 -> {
+                    System.out.println("Goodbye");
+                    System.exit(checkInput);
+                }
             }
         }
 
@@ -54,8 +57,10 @@ public class Menu {
             } else if (checkInput == 2) {
                 menuClient();
             } else if (checkInput == 3) {
+                System.out.println("successful logout");
                 clubCoffee();
             } else if (checkInput == 0) {
+                System.out.println("Goodbye");
                 System.exit(checkInput);
             }
         }
@@ -96,8 +101,14 @@ public class Menu {
                     controllerManager.sortClient();
                     System.out.println("successful arrangement");
                 }
-                case 5 -> menu();
-                case 0 -> System.exit(checkInput);
+                case 5 -> {
+                    System.out.println("successful logout");
+                    menu();
+                }
+                case 0 -> {
+                    System.out.println("Goodbye");
+                    System.exit(checkInput);
+                }
                 default -> System.err.println("Vui lòng chọn theo đúng menu");
             }
         }
@@ -177,8 +188,14 @@ public class Menu {
                 case 5 -> deleteEmployee();
                 case 6 -> System.out.println(controllerManager.totalSalaryAllEmployees());
                 case 7 -> salaryEmployee();
-                case 8 -> menu();
-                case 0 -> System.exit(checkInput);
+                case 8 -> {
+                    System.out.println("successful logout");
+                    menu();
+                }
+                case 0 -> {
+                    System.out.println("Goodbye");
+                    System.exit(checkInput);
+                }
                 default -> System.err.println("Vui lòng nhập lại!!!");
             }
         }

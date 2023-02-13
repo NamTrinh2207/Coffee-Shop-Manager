@@ -76,6 +76,8 @@ public class ControllerManager {
                 if (clients.size() > 0) {
                     clients.remove(p);
                 }
+            }else {
+                return "Không tìm thấy thông tin khách hàng";
             }
         }
         if (clients != null) {
