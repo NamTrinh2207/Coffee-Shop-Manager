@@ -1,0 +1,98 @@
+package storage;
+
+import model.Client;
+import model.Person;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReadWriteToFile {
+    //Clients-------------------------------------------------------------------------
+    public static void writeToFileClient(List<Client> clients) {
+        File file = new File("client.dat");
+        FileOutputStream stream;
+        try {
+            stream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedOutputStream bufSt = new BufferedOutputStream(stream);
+            ObjectOutputStream oos = new ObjectOutputStream(bufSt);
+            oos.writeObject(clients);
+            oos.close();
+        } catch (IOException e) {
+            System.err.println("Không ghi được file");
+        }
+        try {
+            stream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static List<Client> readDataFileClient() {
+        File file = new File("client.dat");
+        List<Client> clients = new ArrayList<>();
+        FileInputStream stream;
+        try {
+            stream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedInputStream bufInSt = new BufferedInputStream(stream);
+            ObjectInputStream ois = new ObjectInputStream(bufInSt);
+            clients = (List<Client>) ois.readObject();
+            stream.close();
+            ois.close();
+        } catch (Exception ex) {
+            System.err.println("Không có dữ liệu");
+        }
+        return clients;
+    }
+    //Employees-------------------------------------------------------------------------
+    public static void writeToFileEmployees(List<Person> employees) {
+        File file = new File("employee.dat");
+        FileOutputStream stream;
+        try {
+            stream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedOutputStream bufSt = new BufferedOutputStream(stream);
+            ObjectOutputStream oos = new ObjectOutputStream(bufSt);
+            oos.writeObject(employees);
+            oos.close();
+        } catch (IOException e) {
+            System.err.println("Không ghi được file");
+        }
+        try {
+            stream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Person> readDataFileEmployees() {
+        File file = new File("employee.dat");
+        List<Person> employees = new ArrayList<>();
+        FileInputStream stream;
+        try {
+            stream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedInputStream bufInSt = new BufferedInputStream(stream);
+            ObjectInputStream ois = new ObjectInputStream(bufInSt);
+            employees = (List<Person>) ois.readObject();
+            stream.close();
+            ois.close();
+        } catch (Exception ex) {
+            System.err.println("Không có dữ liệu");
+        }
+        return employees;
+    }
+}
