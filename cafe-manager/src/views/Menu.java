@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Display {
+public class Menu {
     public static ControllerManager controllerManager = ControllerManager.getInstance();
     public static Scanner input = new Scanner(System.in);
     public static int checkInput;
