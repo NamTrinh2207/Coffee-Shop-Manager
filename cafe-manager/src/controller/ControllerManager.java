@@ -1,4 +1,5 @@
 package controller;
+
 import model.*;
 import storage.ReadWriteToFile;
 
@@ -173,20 +174,20 @@ public class ControllerManager {
         return total.toString();
     }
 
-    public String salaryEmployee(String id, int bonus, int punish) {
+    public String salaryEmployee(String id, double unpaidLeave, int late) {
         StringBuilder salaryEmployee = new StringBuilder();
         double total;
         for (Person nv : employees) {
             if (id.equals(nv.getId())) {
                 if (nv instanceof FullTimeEmployee) {
-                    total = ((FullTimeEmployee) nv).realFieldFullTime(bonus, punish);
-                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Tiền thưởng: ").
-                            append(bonus).append("; Tiền phạt: ").append(punish).append("; Thực lĩnh: ").append(total);
+                    total = ((FullTimeEmployee) nv).realFieldEmployee(unpaidLeave, late);
+                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Nghỉ không lương: ").
+                            append(unpaidLeave).append(" Ngày").append("; Đi muộn: ").append(late).
+                            append("; Thực lĩnh: ").append(total);
                     break;
                 } else if (nv instanceof PartTimeEmployee) {
-                    total = ((PartTimeEmployee) nv).realFieldPartTime(bonus, punish);
-                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Tiền thưởng: ").
-                            append(bonus).append("; Tiền phạt: ").append(punish).append("; Thực lĩnh: ").append(total);
+                    total = ((PartTimeEmployee) nv).calculateTheAmount();
+                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Thực lĩnh: ").append(total);
                     break;
                 }
             }

@@ -41,9 +41,6 @@ public class PartTimeEmployee extends Person implements Serializable {
                 "  Số ĐT : " + getPhoneNumber() +
                 "  Thời gian làm việc : " + workingTimes;
     }
-    public double realFieldPartTime(int bonus, int punish) {
-        return calculateTheAmount() + bonus - punish;
-    }
     @Override
     public double calculateTheAmount() {
         return getWorkingTimes()*hourlyMoney;

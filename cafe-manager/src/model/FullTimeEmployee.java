@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class FullTimeEmployee extends Person implements Serializable {
+public class FullTimeEmployee extends Person implements RealFieldEmployee, Serializable {
     private String email;
     private double hardSalary;
     private double workingDays;
@@ -14,7 +14,7 @@ public class FullTimeEmployee extends Person implements Serializable {
         super(id, name, age, address, phoneNumber);
         this.email = email;
         this.hardSalary = hardSalary;
-        this.workingDays = workingDays;
+        this.workingDays = 26;
     }
 
     public double getHardSalary() {
@@ -54,13 +54,13 @@ public class FullTimeEmployee extends Person implements Serializable {
                 "  Ngày công : " + workingDays;
     }
 
-    public double realFieldFullTime(int bonus, int punish) {
-        return calculateTheAmount() + bonus - punish;
-    }
-
     @Override
     public double calculateTheAmount() {
         return (getHardSalary() * getWorkingDays());
     }
 
+    @Override
+    public double realFieldEmployee(double unpaidLeave, int late) {
+        return calculateTheAmount() - (unpaidLeave * getHardSalary()) - (late * 10000);
+    }
 }
