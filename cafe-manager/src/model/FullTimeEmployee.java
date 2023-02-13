@@ -10,7 +10,7 @@ public class FullTimeEmployee extends Person implements RealFieldEmployee, Seria
     public FullTimeEmployee() {
     }
 
-    public FullTimeEmployee(String id, String name, int age, String address, String phoneNumber, String email, double hardSalary, double workingDays) {
+    public FullTimeEmployee(String id, String name, int age, String address, String phoneNumber, String email, double hardSalary) {
         super(id, name, age, address, phoneNumber);
         this.email = email;
         this.hardSalary = hardSalary;
@@ -50,8 +50,7 @@ public class FullTimeEmployee extends Person implements RealFieldEmployee, Seria
                 "  Địa chỉ : " + getAddress() +
                 "  Số ĐT : " + getPhoneNumber() +
                 "  Email : " + email +
-                "  Lương cứng : " + hardSalary +
-                "  Ngày công : " + workingDays;
+                "  Lương cứng : " + hardSalary;
     }
 
     @Override

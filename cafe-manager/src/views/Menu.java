@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Menu {
     public static ControllerManager controllerManager = ControllerManager.getInstance();
-    public static Scanner input = new Scanner(System.in);
+    public Scanner input = new Scanner(System.in);
     public int checkInput;
     public String checkId;
 
@@ -225,9 +225,7 @@ public class Menu {
                 String email = string();
                 System.out.print("Mời bạn nhập lương của nhân viên : ");
                 double hardSalary = checkDouble();
-                System.out.print("Mời bạn nhập số ngày làm việc : ");
-                double workingDays = checkInt();
-                return new FullTimeEmployee(id, name, age, address, phone, email, hardSalary, workingDays);
+                return new FullTimeEmployee(id, name, age, address, phone, email, hardSalary);
             }
             case 2 -> {
                 System.out.print("Mời bạn nhập mã nhân viên  : ");
