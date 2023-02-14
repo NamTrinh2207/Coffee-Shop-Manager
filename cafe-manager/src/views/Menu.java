@@ -325,7 +325,7 @@ public class Menu {
     }
 
     public void showMessage(String msg) {
-        System.out.print(msg+"\n");
+        System.out.println(msg);
     }
 
     public void showMessageErr(String msg) {

@@ -70,7 +70,7 @@ public class ControllerManager {
         StringBuilder sb = new StringBuilder();
         double sum = 0;
         for (Client p : clients) {
-            if (id.equals(p.getId())) {
+            if (id.trim().equals(p.getId())) {
                 for (Product o : p.getProduct()) {
                     sum += o.getPrice() * o.getQuantity();
                 }
@@ -106,7 +106,6 @@ public class ControllerManager {
         String newPhone;
         String newEmail;
         double newHardSalary;
-        double newWorkingDays;
         System.out.println("Mời bạn nhập vào id nhân viên: ");
         String id = input.nextLine();
         for (Person e : employees) {
@@ -126,15 +125,12 @@ public class ControllerManager {
                     newEmail = input.nextLine();
                     System.out.print("Mời bạn nhập lương cứng nhân viên : ");
                     newHardSalary = Double.parseDouble(input.nextLine());
-                    System.out.print("Mời bạn nhập số ngày làm việc nhân viên : ");
-                    newWorkingDays = Integer.parseInt(input.nextLine());
                     e.setId(newId);
                     e.setName(newName);
                     e.setAge(newAge);
                     e.setAddress(address);
                     e.setPhoneNumber(newPhone);
                     ((FullTimeEmployee) e).setEmail(newEmail);
-                    ((FullTimeEmployee) e).setWorkingDays(newWorkingDays);
                     ((FullTimeEmployee) e).setHardSalary(newHardSalary);
                 } else if (e instanceof PartTimeEmployee) {
                     System.out.print("Mời bạn nhập mã nhân viên  : ");
