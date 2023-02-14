@@ -237,8 +237,7 @@ public class Menu {
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
                 String address = string();
-                showMessage("Mời bạn nhập sđt nhân viên : ");
-                String phone = string();
+                String phone = checkInputPhoneNumber();
                 showMessage("Mời bạn nhập số giờ làm việc : ");
                 double workingTimes = checkInt();
                 return new PartTimeEmployee(id, name, age, address, phone, workingTimes);
