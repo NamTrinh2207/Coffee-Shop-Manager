@@ -3,9 +3,11 @@ package views;
 import controller.ControllerManager;
 import controller.LoginController;
 import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Menu {
     public static ControllerManager controllerManager = ControllerManager.getInstance();
@@ -127,8 +129,7 @@ public class Menu {
         int age = checkInt();
         showMessage("Nhập địa chỉ:");
         String address = string();
-        showMessage("Nhập sđt:");
-        String phone = string();
+        String phone = checkPhoneNumber();
         showMessage("Nhập số lượng cà phê khách hàng mua:");
         int sp = checkInt();
         List<Product> products = new ArrayList<>();
@@ -330,6 +331,21 @@ public class Menu {
 
     public void showMessageErr(String msg) {
         System.err.println(msg);
+    }
+
+    //regex-------------------------------------------------------------------------------------------------
+    public String checkPhoneNumber() {
+        while (true) {
+            showMessage("Nhập sđt: ");
+            String phone = string();
+            Pattern checkPhone = Pattern.compile("^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$");
+            if (checkPhone.matcher(phone).find()) {
+                System.out.println("phone is ok");
+                return phone;
+            } else {
+                System.err.println("phone is not ok");
+            }
+        }
     }
 }
 

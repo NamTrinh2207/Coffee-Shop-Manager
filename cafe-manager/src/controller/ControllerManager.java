@@ -77,6 +77,8 @@ public class ControllerManager {
                 sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append(sum);
                 if (clients.size() > 0) {
                     clients.remove(p);
+                }else {
+                    return new ArrayList<>();
                 }
             } else {
                 return "Không tìm thấy thông tin khách hàng";

@@ -40,7 +40,7 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return
-                "Sản phẩm " +
+                " Cà Phê: " +
                         "  Tên : " + name +
                         "  Giá : " + price +
                         "  Số lượng : " + quantity + "\n";
