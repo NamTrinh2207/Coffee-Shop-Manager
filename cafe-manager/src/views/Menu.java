@@ -84,10 +84,10 @@ public class Menu {
         while (true) {
             showMessage("""
                     +--------------- QUẢN LÝ HÓA ĐƠN ---------------+
-                    |    1. Thêm khách hàng                         |
-                    |    2. Danh sách khách mua hàng                |
+                    |    1. Thêm hóa đơn mới                        |
+                    |    2. Danh sách hóa đơn                       |
                     |    3. Tính tiền theo id khách hàng            |
-                    |    4. Sắp xếp theo tên khách hàng             |
+                    |    4. Sắp xếp hóa đơn theo tên khách hàng     |
                     |    5. Đăng xuất                               |
                     |    0. Thoát                                   |
                     +-----------------------------------------------+
@@ -173,7 +173,7 @@ public class Menu {
                     |   4. Sửa thông tin nhân viên                  |
                     |   5. Xóa nhân viên                            |
                     |   6. Tổng lương của tất cả nhân viên          |
-                    |   7. Tính lương nhân viên                     |
+                    |   7. Tính lương thực lĩnh của nhân viên       |
                     |   8. Đăng xuất                                |
                     |   0. Thoát                                    |
                     +-----------------------------------------------+
