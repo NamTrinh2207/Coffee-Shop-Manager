@@ -223,8 +223,7 @@ public class Menu {
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
                 String address = string();
                 String phone = checkInputPhoneNumber();
-                showMessage("Mời bạn nhập email nhân viên : ");
-                String email = string();
+                String email = checkInputEmail();
                 showMessage("Mời bạn nhập lương của nhân viên : ");
                 double hardSalary = checkDouble();
                 return new FullTimeEmployee(id, name, age, address, phone, email, hardSalary);
@@ -343,6 +342,19 @@ public class Menu {
                 return phone;
             } else {
                 System.err.println("phone is not ok");
+            }
+        }
+    }
+    public String checkInputEmail(){
+        while (true) {
+            showMessage("Nhập email: ");
+            String email = string();
+            Pattern checkPhone = Pattern.compile("^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$");
+            if (checkPhone.matcher(email).find()) {
+                System.out.println("email is ok");
+                return email;
+            } else {
+                System.err.println("email is not ok");
             }
         }
     }
