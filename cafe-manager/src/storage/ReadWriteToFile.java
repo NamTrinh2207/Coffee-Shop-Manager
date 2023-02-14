@@ -2,21 +2,25 @@ package storage;
 
 import model.Client;
 import model.Person;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadWriteToFile {
     //Clients-------------------------------------------------------------------------
-    private ReadWriteToFile(){
+    private ReadWriteToFile() {
     }
+
     private static ReadWriteToFile instance;
-    public static ReadWriteToFile getInstance(){
-        if (instance==null) {
+
+    public static ReadWriteToFile getInstance() {
+        if (instance == null) {
             instance = new ReadWriteToFile();
         }
         return instance;
     }
+
     public void writeToFileClient(List<Client> clients) {
         File file = new File("client.dat");
         FileOutputStream stream;
@@ -39,6 +43,7 @@ public class ReadWriteToFile {
             throw new RuntimeException(e);
         }
     }
+
     public List<Client> readDataFileClient() {
         File file = new File("client.dat");
         List<Client> clients = new ArrayList<>();
@@ -52,13 +57,14 @@ public class ReadWriteToFile {
             BufferedInputStream bufInSt = new BufferedInputStream(stream);
             ObjectInputStream ois = new ObjectInputStream(bufInSt);
             clients = (List<Client>) ois.readObject();
-            stream.close();
             ois.close();
+            stream.close();
         } catch (Exception ex) {
             System.err.println("Không có dữ liệu");
         }
         return clients;
     }
+
     //Employees-------------------------------------------------------------------------
     public void writeToFileEmployees(List<Person> employees) {
         File file = new File("employee.dat");
@@ -96,8 +102,8 @@ public class ReadWriteToFile {
             BufferedInputStream bufInSt = new BufferedInputStream(stream);
             ObjectInputStream ois = new ObjectInputStream(bufInSt);
             employees = (List<Person>) ois.readObject();
-            stream.close();
             ois.close();
+            stream.close();
         } catch (Exception ex) {
             System.err.println("Không có dữ liệu");
         }

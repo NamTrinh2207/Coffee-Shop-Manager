@@ -129,7 +129,7 @@ public class Menu {
         int age = checkInt();
         showMessage("Nhập địa chỉ:");
         String address = string();
-        String phone = checkPhoneNumber();
+        String phone = checkInputPhoneNumber();
         showMessage("Nhập số lượng cà phê khách hàng mua:");
         int sp = checkInt();
         List<Product> products = new ArrayList<>();
@@ -222,8 +222,7 @@ public class Menu {
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
                 String address = string();
-                showMessage("Mời bạn nhập sđt nhân viên : ");
-                String phone = string();
+                String phone = checkInputPhoneNumber();
                 showMessage("Mời bạn nhập email nhân viên : ");
                 String email = string();
                 showMessage("Mời bạn nhập lương của nhân viên : ");
@@ -334,7 +333,7 @@ public class Menu {
     }
 
     //regex-------------------------------------------------------------------------------------------------
-    public String checkPhoneNumber() {
+    public String checkInputPhoneNumber() {
         while (true) {
             showMessage("Nhập sđt: ");
             String phone = string();
