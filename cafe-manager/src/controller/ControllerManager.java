@@ -8,12 +8,12 @@ import java.util.*;
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
-    private static List<Client> clients;
-    private static List<Person> employees;
+    private final List<Client> clients;
+    private final List<Person> employees;
 
     private ControllerManager() {
-        clients = ReadWriteToFile.getInstance().readDataFileClient();
-        employees = ReadWriteToFile.getInstance().readDataFileEmployees();
+        this.clients = ReadWriteToFile.getInstance().readDataFileClient();
+        this.employees = ReadWriteToFile.getInstance().readDataFileEmployees();
     }
 
     public static ControllerManager getInstance() {
