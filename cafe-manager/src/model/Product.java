@@ -42,7 +42,7 @@ public class Product implements Serializable {
         return
                 " Cà Phê: " +
                         "  Tên : " + name +
-                        "  Giá : " + price +
-                        "  Số lượng : " + quantity + "\n";
+                        ",  Giá : " + price + " VNĐ" +
+                        ",  Số lượng : " + quantity + "\n";
     }
 }

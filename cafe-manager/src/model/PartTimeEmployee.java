@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class PartTimeEmployee extends Person implements Serializable {
+public class PartTimeEmployee extends Person {
     private double workingTimes;
     private double hourlyMoney;
 
@@ -35,15 +33,16 @@ public class PartTimeEmployee extends Person implements Serializable {
     public String toString() {
         return "Nhân viên part time: " +
                 "  id: " + getId() +
-                "  Họ tên : " + getName() +
-                "  Tuổi : " + getAge() +
-                "  Địa chỉ : " + getAddress() +
-                "  Số ĐT : " + getPhoneNumber() +
-                "  Thời gian làm việc : " + workingTimes;
+                ",  Họ tên : " + getName() +
+                ",  Tuổi : " + getAge() +
+                ",  Địa chỉ : " + getAddress() +
+                ",  Số ĐT : " + getPhoneNumber() +
+                ",  Thời gian làm việc : " + workingTimes + " giờ";
     }
+
     @Override
     public double calculateTheAmount() {
-        return getWorkingTimes()*hourlyMoney;
+        return getWorkingTimes() * hourlyMoney;
     }
 
 }

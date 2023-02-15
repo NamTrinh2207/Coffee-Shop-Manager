@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class FullTimeEmployee extends Person implements RealFieldEmployee, Serializable {
+public class FullTimeEmployee extends Person implements RealFieldEmployee{
     private String email;
     private double hardSalary;
     private double workingDays;
@@ -45,12 +43,12 @@ public class FullTimeEmployee extends Person implements RealFieldEmployee, Seria
     public String toString() {
         return "Nhân viên full time: " +
                 "  id: " + getId() +
-                "  Họ tên : " + getName() +
-                "  Tuổi : " + getAge() +
-                "  Địa chỉ : " + getAddress() +
-                "  Số ĐT : " + getPhoneNumber() +
-                "  Email : " + email +
-                "  Lương cứng : " + hardSalary;
+                ",  Họ tên : " + getName() +
+                ",  Tuổi : " + getAge() +
+                ",  Địa chỉ : " + getAddress() +
+                ",  Số ĐT : " + getPhoneNumber() +
+                ",  Email : " + email +
+                ",  Lương cứng : " + hardSalary+ " VNĐ";
     }
 
     @Override

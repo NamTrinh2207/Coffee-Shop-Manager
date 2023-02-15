@@ -59,7 +59,7 @@ public class ReadWriteToFile implements ReadWrite{
             ois.close();
             stream.close();
         } catch (Exception ex) {
-            System.err.println("Không có dữ liệu");
+            System.err.println("Không đọc được dữ liệu");
         }
         return clients;
     }
@@ -105,7 +105,7 @@ public class ReadWriteToFile implements ReadWrite{
             ois.close();
             stream.close();
         } catch (Exception ex) {
-            System.err.println("Không có dữ liệu");
+            System.err.println("Không đọc được dữ liệu");
         }
         return employees;
     }

@@ -6,6 +6,7 @@ import storage.ReadWriteToFile;
 
 import java.util.*;
 
+
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
@@ -44,7 +45,7 @@ public class ControllerManager {
         readWrite.writeToFileEmployees(employees);
     }
 
-    public void display() {
+    public void displayClients() {
         for (Client o : clients) {
             System.out.println(o);
         }
@@ -60,6 +61,7 @@ public class ControllerManager {
         for (Person o : employees) {
             if (id.equals(o.getId())) {
                 employees.remove(o);
+                System.out.println("successful delete by " + o.getFullName());
                 break;
             } else {
                 System.err.println("không có id nào của nhân viên trùng với " + id + " bạn vừa nhập");
@@ -74,7 +76,7 @@ public class ControllerManager {
         for (Client p : clients) {
             if (id.trim().equals(p.getId())) {
                 sum = p.calculateTheAmount();
-                sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append(sum);
+                sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append((long) sum).append(" VNĐ");
                 if (clients != null) {
                     clients.remove(p);
                     readWrite.writeToFileClient(clients);
@@ -96,7 +98,6 @@ public class ControllerManager {
     }
 
     public void editEmployee(Scanner input) {
-        String newId;
         String newName;
         int newAge;
         String address;
@@ -108,8 +109,6 @@ public class ControllerManager {
         for (Person e : employees) {
             if (id.equals(e.getId())) {
                 if (e instanceof FullTimeEmployee) {
-                    System.out.print("Mời bạn nhập mã nhân viên  : ");
-                    newId = input.nextLine();
                     System.out.print("Mời bạn nhập tên nhân viên : ");
                     newName = input.nextLine();
                     System.out.print("Mời bạn nhập tuổi nhân viên : ");
@@ -122,7 +121,6 @@ public class ControllerManager {
                     newEmail = input.nextLine();
                     System.out.print("Mời bạn nhập lương cứng nhân viên : ");
                     newHardSalary = Double.parseDouble(input.nextLine());
-                    e.setId(newId);
                     e.setName(newName);
                     e.setAge(newAge);
                     e.setAddress(address);
@@ -130,8 +128,6 @@ public class ControllerManager {
                     ((FullTimeEmployee) e).setEmail(newEmail);
                     ((FullTimeEmployee) e).setHardSalary(newHardSalary);
                 } else if (e instanceof PartTimeEmployee) {
-                    System.out.print("Mời bạn nhập mã nhân viên  : ");
-                    newId = input.nextLine();
                     System.out.print("Mời bạn nhập tên nhân viên : ");
                     newName = input.nextLine();
                     System.out.print("Mời bạn nhập tuổi nhân viên : ");
@@ -142,7 +138,6 @@ public class ControllerManager {
                     newPhone = input.nextLine();
                     System.out.print("Mời bạn nhập số giờ làm việc : ");
                     double newWorkTime = Integer.parseInt(input.nextLine());
-                    e.setId(newId);
                     e.setName(newName);
                     e.setAge(newAge);
                     e.setAddress(address);
@@ -167,39 +162,56 @@ public class ControllerManager {
             }
         }
         totalSalary = FullTimeSalary + PartTimeSalary;
-        total.append("Tổng lương của tất cả nhân viên: ").append(totalSalary);
+        total.append("Tổng lương của tất cả nhân viên: ").append((long) totalSalary).append(" VNĐ");
         return total.toString();
     }
 
-    public String salaryEmployee(String id, double unpaidLeave, int late) {
+    public String salaryFullTime(String id) {
         StringBuilder salaryEmployee = new StringBuilder();
         double total;
         for (Person nv : employees) {
             if (id.equals(nv.getId())) {
                 if (nv instanceof FullTimeEmployee) {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Số ngày nghỉ (Ngày):  ");
+                    double unpaidLeave = Double.parseDouble(scanner.nextLine());
+                    System.out.println("Đi muộn (ngày/tháng):  ");
+                    int late = Integer.parseInt(scanner.nextLine());
                     total = ((FullTimeEmployee) nv).realFieldEmployee(unpaidLeave, late);
-                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Nghỉ không lương: ").
-                            append(unpaidLeave).append(" Ngày").append("; Đi muộn: ").append(late).
-                            append("; Thực lĩnh: ").append(total);
-                    break;
-                } else if (nv instanceof PartTimeEmployee) {
-                    total = ((PartTimeEmployee) nv).calculateTheAmount();
-                    salaryEmployee.append("Nhân viên: ").append(nv.getFullName()).append("; Thực lĩnh: ").append(total);
-                    break;
+                    salaryEmployee.append("Nhân viên full time: ").append(nv.getName()).append("; Nghỉ không lương: ").
+                            append(unpaidLeave).append(" Ngày").append("; Đi muộn: ").append(late).append(" Ngày").
+                            append("; Thực lĩnh: ").append((long) total).append(" VNĐ");
+                    return salaryEmployee.toString();
                 }
             }
         }
-        return salaryEmployee.toString();
+        return "id bạn nhập không có hoặc trùng id với nhân viên part time";
     }
 
-    public void sortEmployees() {
+    public String salaryPartTime(String id) {
+        StringBuilder salaryEmployee = new StringBuilder();
+        double total;
+        for (Person nv : employees) {
+            if (nv.getId().equalsIgnoreCase(id)) {
+                if (nv instanceof PartTimeEmployee) {
+                    total = ((PartTimeEmployee) nv).calculateTheAmount();
+                    salaryEmployee.append("Nhân viên part time: ").append(nv.getName()).append("; Thực lĩnh: ").
+                            append((long) total);
+                    return salaryEmployee.toString();
+                }
+            }
+        }
+        return "id bạn nhập không có hoặc trùng id với nhân viên full time";
+    }
+
+    public void sortNameEmployees() {
         employees.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        readWrite.writeToFileClient(clients);
+        readWrite.writeToFileEmployees(employees);
     }
 
 }

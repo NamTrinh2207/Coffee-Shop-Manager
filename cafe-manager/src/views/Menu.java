@@ -78,7 +78,7 @@ public class Menu {
         LoginController control = new LoginController(view);
         control.AdminLogin();
     }
-    //Client----------------------------------------------------------------------
+    //Client--------------------------------------------------------------------------------------------
 
     public void menuClient() {
         while (true) {
@@ -95,8 +95,14 @@ public class Menu {
             showMessage("Lựa chọn: ");
             checkInput = checkInt();
             switch (checkInput) {
-                case 1 -> controllerManager.addNewClient(addClient());
-                case 2 -> controllerManager.display();
+                case 1 -> {
+                    showMessage("Thêm hóa đơn mới :");
+                    controllerManager.addNewClient(addClient());
+                }
+                case 2 -> {
+                    showMessage("Danh sách hóa đơn :");
+                    checkEmptyClients();
+                }
                 case 3 -> prepareInvoice();
                 case 4 -> {
                     controllerManager.sortClient();
@@ -146,13 +152,21 @@ public class Menu {
         return new Client(id, name, age, address, phone, products);
     }
 
+    public void checkEmptyClients() {
+        if (controllerManager.getClients().size() == 0) {
+            showMessageErr("Danh sách hiện tại đang trống!");
+        } else {
+            controllerManager.displayClients();
+        }
+    }
+
     public String checkCustomerId() {
         showMessage("Nhập mã khách hàng:");
         String id = string();
         for (Client o : ControllerManager.getInstance().getClients()) {
             while (true) {
                 if (o.getId().equals(id)) {
-                    showMessageErr("Trùng id ! Vui lòng nhập lại");
+                    showMessageErr("id bạn nhập đã có trong danh sách ! Vui lòng nhập lại");
                     id = input.nextLine();
                 } else {
                     break;
@@ -173,25 +187,36 @@ public class Menu {
                     |   4. Sửa thông tin nhân viên                  |
                     |   5. Xóa nhân viên                            |
                     |   6. Tổng lương của tất cả nhân viên          |
-                    |   7. Tính lương thực lĩnh của nhân viên       |
-                    |   8. Đăng xuất                                |
+                    |   7. Tính lương thực lĩnh nhân viên full time |
+                    |   8. Tính lương thực lĩnh nhân viên part time |
+                    |   9. Đăng xuất                                |
                     |   0. Thoát                                    |
                     +-----------------------------------------------+
                     """);
             showMessage("Lựa chọn: ");
             checkInput = checkInt();
             switch (checkInput) {
-                case 1 -> controllerManager.addNewEmployee(addEmployee());
+                case 1 -> {
+                    showMessage("Thêm nhân viên:");
+                    controllerManager.addNewEmployee(addEmployee());
+                }
                 case 2 -> {
-                    controllerManager.sortEmployees();
+                    controllerManager.sortNameEmployees();
                     showMessage("successful arrangement");
                 }
-                case 3 -> controllerManager.displayEmployees();
-                case 4 -> controllerManager.editEmployee(input);
+                case 3 -> {
+                    showMessage("Danh sách nhân viên :");
+                    checkEmptyEmployee();
+                }
+                case 4 -> {
+                    showMessage("Sửa thông tin nhân viên:");
+                    controllerManager.editEmployee(input);
+                }
                 case 5 -> deleteEmployee();
                 case 6 -> System.out.println(controllerManager.totalSalaryAllEmployees());
-                case 7 -> salaryEmployee();
-                case 8 -> {
+                case 7 -> salaryEmployeeFullTime();
+                case 8 -> salaryEmployeePartTime();
+                case 9 -> {
                     showMessage("successful logout");
                     menu();
                 }
@@ -215,7 +240,7 @@ public class Menu {
         switch (checkInput) {
             case 1 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
-                String id = checkId();
+                String id = checkEmployeeId();
                 showMessage("Mời bạn nhập tên nhân viên  : ");
                 String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
@@ -230,7 +255,7 @@ public class Menu {
             }
             case 2 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
-                String id = checkId();
+                String id = checkEmployeeId();
                 showMessage("Mời bạn nhập tên nhân viên  : ");
                 String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
@@ -248,6 +273,14 @@ public class Menu {
         return null;
     }
 
+    public void checkEmptyEmployee() {
+        if (controllerManager.getEmployees().size() == 0) {
+            showMessageErr("Danh sách hiện tại đang trống!");
+        } else {
+            controllerManager.displayEmployees();
+        }
+    }
+
     public void deleteEmployee() {
         if (controllerManager.getEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
@@ -258,27 +291,40 @@ public class Menu {
         }
     }
 
-    public void salaryEmployee() {
+    public void salaryEmployeeFullTime() {
         if (controllerManager.getEmployees().isEmpty()) {
-            showMessage("Danh sách trống!");
+            showMessageErr("Danh sách trống!");
         } else {
-            showMessage("Nhập id nhân viên muốn tính lương:  ");
+            showMessage("Nhập id nhân viên full time:  ");
             checkId = string();
-            for (Person o : controllerManager.getEmployees()
-            ) {
-                if (!checkId.equals(o.getId())) {
-                    showMessageErr("Không tìm thấy id nhân viên tương ứng");
-                    break;
-                }
-            }
-            showMessage("Số ngày nghỉ (Ngày):  ");
-            double unpaidLeave = checkInt();
-            showMessage("Đi muộn (ngày/tháng):  ");
-            int late = checkInt();
-            System.out.println(controllerManager.salaryEmployee(checkId, unpaidLeave, late));
+            System.out.println(controllerManager.salaryFullTime(checkId));
         }
     }
 
+    public void salaryEmployeePartTime() {
+        if (controllerManager.getEmployees().isEmpty()) {
+            showMessageErr("Danh sách trống!");
+        } else {
+            showMessage("Nhập id nhân viên part time:  ");
+            checkId = string();
+            System.out.println(controllerManager.salaryPartTime(checkId));
+        }
+    }
+
+    public String checkEmployeeId() {
+        String id = string();
+        for (Person o : ControllerManager.getInstance().getEmployees()) {
+            while (true) {
+                if (o.getId().equals(id)) {
+                    showMessageErr("id này đã có trong danh sách ! Vui lòng nhập lại");
+                    id = input.nextLine();
+                } else {
+                    break;
+                }
+            }
+        }
+        return id;
+    }
 
     //check input-------------------------------------------------------------------------------------------------
     public String string() {
@@ -343,26 +389,6 @@ public class Menu {
                 System.err.println("email is not ok");
             }
         }
-    }
-
-    public String checkId() {
-        String id = string();
-        Pattern checkId = Pattern.compile("^[a-zA-Z0-9]{10}$");
-        for (Person o : ControllerManager.getInstance().getEmployees()) {
-            while (true) {
-                if (checkId.matcher(id).find()) {
-                    if (o.getId().equals(id)) {
-                        showMessageErr("Trùng id ! Vui lòng nhập lại");
-                        id = input.nextLine();
-                    } else {
-                        break;
-                    }
-                } else {
-                    System.err.println("id is not ok");
-                }
-            }
-        }
-        return id;
     }
 }
 

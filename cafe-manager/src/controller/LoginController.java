@@ -12,8 +12,7 @@ public class LoginController {
     }
 
     private boolean check(LoginModel user) {
-        if (user.getUser().equals("admin") &&
-                user.getPass().equals("123")) {
+        if (checkAdmin(user)) {
             return true;
         }
         for (Person o : ControllerManager.getInstance().getEmployees()) {
