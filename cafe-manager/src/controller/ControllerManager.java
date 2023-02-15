@@ -9,7 +9,7 @@ import java.util.*;
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
-    private  final ReadWrite readWrite = ReadWriteToFile.getInstance();
+    private final ReadWrite readWrite = ReadWriteToFile.getInstance();
     private final List<Client> clients;
     private final List<Person> employees;
 
@@ -70,26 +70,19 @@ public class ControllerManager {
 
     public Object totalMoney(String id) {
         StringBuilder sb = new StringBuilder();
-        double sum = 0;
+        double sum;
         for (Client p : clients) {
             if (id.trim().equals(p.getId())) {
-                for (Product o : p.getProduct()) {
-                    sum += o.getPrice() * o.getQuantity();
-                }
+                sum = p.calculateTheAmount();
                 sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append(sum);
-                if (clients.size() > 0) {
-                    clients.remove(p);
-                }else {
-                    return new ArrayList<>();
-                }
-            } else {
-                return "Không tìm thấy thông tin khách hàng";
+                clients.remove(p);
+                return sb;
             }
         }
         if (clients != null) {
             readWrite.writeToFileClient(clients);
         }
-        return sb;
+        return "Không tìm thấy id khách hàng";
     }
 
     public void sortClient() {

@@ -366,7 +366,7 @@ public class Menu {
         while (true) {
             showMessage("Nhập họ tên: ");
             String name = string();
-            Pattern checkName = Pattern.compile("^[a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ']$");
+            Pattern checkName = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$");
             if (checkName.matcher(name).find()) {
                 System.out.println("name is ok");
                 return name;

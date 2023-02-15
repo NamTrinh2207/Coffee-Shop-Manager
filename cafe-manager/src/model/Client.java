@@ -1,4 +1,5 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class Client extends Person {
 
     @Override
     public double calculateTheAmount() {
-        return 0;
+        double sum = 0;
+        for (Product o : product) {
+            sum += o.getPrice() * o.getQuantity();
+        }
+        return sum;
     }
 }
