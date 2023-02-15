@@ -75,12 +75,12 @@ public class ControllerManager {
             if (id.trim().equals(p.getId())) {
                 sum = p.calculateTheAmount();
                 sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append(sum);
-                clients.remove(p);
+                if (clients != null) {
+                    clients.remove(p);
+                    readWrite.writeToFileClient(clients);
+                }
                 return sb;
             }
-        }
-        if (clients != null) {
-            readWrite.writeToFileClient(clients);
         }
         return "Không tìm thấy id khách hàng";
     }
