@@ -1,7 +1,9 @@
 package views;
+
 import controller.ControllerManager;
 import controller.LoginController;
 import model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -364,7 +366,7 @@ public class Menu {
         while (true) {
             showMessage("Nhập họ tên: ");
             String name = string();
-            Pattern checkName = Pattern.compile("^[a-zA-Z ]{10,20}$");
+            Pattern checkName = Pattern.compile("^[a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ']$");
             if (checkName.matcher(name).find()) {
                 System.out.println("name is ok");
                 return name;
