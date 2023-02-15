@@ -123,8 +123,7 @@ public class Menu {
 
     public Client addClient() {
         String id = checkCustomerId();
-        showMessage("Nhập tên khách hàng:");
-        String name = string();
+        String name = checkFullName();
         showMessage("Nhập tuổi khách hàng :");
         int age = checkInt();
         showMessage("Nhập địa chỉ:");
@@ -216,8 +215,7 @@ public class Menu {
             case 1 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
                 String id = checkId();
-                showMessage("Mời bạn nhập tên nhân viên : ");
-                String name = string();
+                String name = checkFullName();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
@@ -231,8 +229,7 @@ public class Menu {
             case 2 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
                 String id = checkId();
-                showMessage("Mời bạn nhập tên nhân viên : ");
-                String name = string();
+                String name = checkFullName();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
@@ -344,6 +341,7 @@ public class Menu {
             }
         }
     }
+
     public String checkId() {
         String id = string();
         Pattern checkId = Pattern.compile("^[a-zA-Z0-9]{10}$");
@@ -362,6 +360,20 @@ public class Menu {
             }
         }
         return id;
+    }
+
+    public String checkFullName() {
+        while (true) {
+            showMessage("Nhập họ tên: ");
+            String name = string();
+            Pattern checkName = Pattern.compile("^[a-zA-Z ]{10,20}$");
+            if (checkName.matcher(name).find()) {
+                System.out.println("name is ok");
+                return name;
+            } else {
+                System.err.println("name is not ok");
+            }
+        }
     }
 }
 
