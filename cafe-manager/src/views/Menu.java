@@ -215,7 +215,7 @@ public class Menu {
         switch (checkInput) {
             case 1 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
-                String id = checkEmployeeId();
+                String id = checkId();
                 showMessage("Mời bạn nhập tên nhân viên : ");
                 String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
@@ -230,7 +230,7 @@ public class Menu {
             }
             case 2 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
-                String id = checkEmployeeId();
+                String id = checkId();
                 showMessage("Mời bạn nhập tên nhân viên : ");
                 String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
@@ -279,20 +279,6 @@ public class Menu {
         }
     }
 
-    public String checkEmployeeId() {
-        String id = string();
-        for (Person o : ControllerManager.getInstance().getEmployees()) {
-            while (true) {
-                if (o.getId().equals(id)) {
-                    showMessageErr("Trùng id ! Vui lòng nhập lại");
-                    id = input.nextLine();
-                } else {
-                    break;
-                }
-            }
-        }
-        return id;
-    }
 
     //check input-------------------------------------------------------------------------------------------------
     public String string() {
@@ -344,7 +330,8 @@ public class Menu {
             }
         }
     }
-    public String checkInputEmail(){
+
+    public String checkInputEmail() {
         while (true) {
             showMessage("Nhập email: ");
             String email = string();
@@ -356,6 +343,25 @@ public class Menu {
                 System.err.println("email is not ok");
             }
         }
+    }
+    public String checkId() {
+        String id = string();
+        Pattern checkId = Pattern.compile("^[a-zA-Z0-9]{10}$");
+        for (Person o : ControllerManager.getInstance().getEmployees()) {
+            while (true) {
+                if (checkId.matcher(id).find()) {
+                    if (o.getId().equals(id)) {
+                        showMessageErr("Trùng id ! Vui lòng nhập lại");
+                        id = input.nextLine();
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.err.println("id is not ok");
+                }
+            }
+        }
+        return id;
     }
 }
 
