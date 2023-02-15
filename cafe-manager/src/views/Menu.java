@@ -123,7 +123,8 @@ public class Menu {
 
     public Client addClient() {
         String id = checkCustomerId();
-        String name = checkFullName();
+        showMessage("Mời bạn nhập tên khách hàng : ");
+        String name = string();
         showMessage("Nhập tuổi khách hàng :");
         int age = checkInt();
         showMessage("Nhập địa chỉ:");
@@ -215,7 +216,8 @@ public class Menu {
             case 1 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
                 String id = checkId();
-                String name = checkFullName();
+                showMessage("Mời bạn nhập tên nhân viên  : ");
+                String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
@@ -229,7 +231,8 @@ public class Menu {
             case 2 -> {
                 showMessage("Mời bạn nhập mã nhân viên  : ");
                 String id = checkId();
-                String name = checkFullName();
+                showMessage("Mời bạn nhập tên nhân viên  : ");
+                String name = string();
                 showMessage("Mời bạn nhập tuổi nhân viên : ");
                 int age = checkInt();
                 showMessage("Mời bạn nhập địa chỉ nhân viên : ");
@@ -360,20 +363,6 @@ public class Menu {
             }
         }
         return id;
-    }
-
-    public String checkFullName() {
-        while (true) {
-            showMessage("Nhập họ tên: ");
-            String name = string();
-            Pattern checkName = Pattern.compile("^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$");
-            if (checkName.matcher(name).find()) {
-                System.out.println("name is ok");
-                return name;
-            } else {
-                System.err.println("name is not ok");
-            }
-        }
     }
 }
 
