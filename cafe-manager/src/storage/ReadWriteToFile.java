@@ -9,12 +9,11 @@ import java.util.List;
 
 public class ReadWriteToFile implements ReadWrite{
     //Clients-------------------------------------------------------------------------
-    public ReadWriteToFile() {
+    private ReadWriteToFile() {
     }
 
     private static ReadWriteToFile instance;
-
-    public ReadWriteToFile getInstance() {
+    public static ReadWriteToFile getInstance() {
         if (instance == null) {
             instance = new ReadWriteToFile();
         }

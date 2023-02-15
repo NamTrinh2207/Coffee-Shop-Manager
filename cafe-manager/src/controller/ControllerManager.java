@@ -9,7 +9,7 @@ import java.util.*;
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
-    private static final ReadWrite readWrite = new ReadWriteToFile();
+    private  final ReadWrite readWrite = ReadWriteToFile.getInstance();
     private final List<Client> clients;
     private final List<Person> employees;
 
