@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import storage.ReadWrite;
 import storage.ReadWriteToFile;
 
 import java.util.*;
@@ -8,12 +9,13 @@ import java.util.*;
 public class ControllerManager {
     //Display saving---------------------------------------------------------------------------------
     private static ControllerManager instance;
+    private static final ReadWrite readWrite = new ReadWriteToFile();
     private final List<Client> clients;
     private final List<Person> employees;
 
     private ControllerManager() {
-        this.clients = ReadWriteToFile.getInstance().readDataFileClient();
-        this.employees = ReadWriteToFile.getInstance().readDataFileEmployees();
+        this.clients = readWrite.readDataFileClient();
+        this.employees = readWrite.readDataFileEmployees();
     }
 
     public static ControllerManager getInstance() {
@@ -34,12 +36,12 @@ public class ControllerManager {
     //CRUD Client------------------------------------------------------------------------------------
     public void addNewClient(Client client) {
         clients.add(client);
-        ReadWriteToFile.getInstance().writeToFileClient(clients);
+        readWrite.writeToFileClient(clients);
     }
 
     public void addNewEmployee(Person employee) {
         employees.add(employee);
-        ReadWriteToFile.getInstance().writeToFileEmployees(employees);
+        readWrite.writeToFileEmployees(employees);
     }
 
     public void display() {
@@ -63,7 +65,7 @@ public class ControllerManager {
                 System.err.println("không có id nào của nhân viên trùng với " + id + " bạn vừa nhập");
             }
         }
-        ReadWriteToFile.getInstance().writeToFileEmployees(employees);
+        readWrite.writeToFileEmployees(employees);
     }
 
     public Object totalMoney(String id) {
@@ -85,7 +87,7 @@ public class ControllerManager {
             }
         }
         if (clients != null) {
-            ReadWriteToFile.getInstance().writeToFileClient(clients);
+            readWrite.writeToFileClient(clients);
         }
         return sb;
     }
@@ -97,7 +99,7 @@ public class ControllerManager {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        ReadWriteToFile.getInstance().writeToFileClient(clients);
+        readWrite.writeToFileClient(clients);
     }
 
     public void editEmployee(Scanner input) {
@@ -204,7 +206,7 @@ public class ControllerManager {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        ReadWriteToFile.getInstance().writeToFileClient(clients);
+        readWrite.writeToFileClient(clients);
     }
 
 }

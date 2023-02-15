@@ -7,20 +7,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadWriteToFile {
+public class ReadWriteToFile implements ReadWrite{
     //Clients-------------------------------------------------------------------------
-    private ReadWriteToFile() {
+    public ReadWriteToFile() {
     }
 
     private static ReadWriteToFile instance;
 
-    public static ReadWriteToFile getInstance() {
+    public ReadWriteToFile getInstance() {
         if (instance == null) {
             instance = new ReadWriteToFile();
         }
         return instance;
     }
-
+    @Override
     public void writeToFileClient(List<Client> clients) {
         File file = new File("client.dat");
         FileOutputStream stream;
@@ -43,7 +43,7 @@ public class ReadWriteToFile {
             throw new RuntimeException(e);
         }
     }
-
+    @Override
     public List<Client> readDataFileClient() {
         File file = new File("client.dat");
         List<Client> clients = new ArrayList<>();
@@ -66,6 +66,7 @@ public class ReadWriteToFile {
     }
 
     //Employees-------------------------------------------------------------------------
+    @Override
     public void writeToFileEmployees(List<Person> employees) {
         File file = new File("employee.dat");
         FileOutputStream stream;
@@ -88,7 +89,7 @@ public class ReadWriteToFile {
             throw new RuntimeException(e);
         }
     }
-
+    @Override
     public List<Person> readDataFileEmployees() {
         File file = new File("employee.dat");
         List<Person> employees = new ArrayList<>();
