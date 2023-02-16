@@ -57,17 +57,16 @@ public class ControllerManager {
         }
     }
 
-    public void deleteByEmploy(String id) {
+    public String deleteByEmploy(String id) {
         for (Person o : employees) {
             if (id.equals(o.getId())) {
                 employees.remove(o);
                 System.out.println("successful delete by " + o.getFullName());
                 break;
-            } else {
-                System.err.println("không có id nào của nhân viên trùng với " + id + " bạn vừa nhập");
             }
         }
         readWrite.writeToFileEmployees(employees);
+        return "ib bạn nhập không có trong dánh sách";
     }
 
     public Object totalMoney(String id) {
@@ -95,57 +94,6 @@ public class ControllerManager {
             }
         });
         readWrite.writeToFileClient(clients);
-    }
-
-    public void editEmployee(Scanner input) {
-        String newName;
-        int newAge;
-        String address;
-        String newPhone;
-        String newEmail;
-        double newHardSalary;
-        System.out.println("Mời bạn nhập vào id nhân viên: ");
-        String id = input.nextLine();
-        for (Person e : employees) {
-            if (id.equals(e.getId())) {
-                if (e instanceof FullTimeEmployee) {
-                    System.out.print("Mời bạn nhập tên nhân viên : ");
-                    newName = input.nextLine();
-                    System.out.print("Mời bạn nhập tuổi nhân viên : ");
-                    newAge = Integer.parseInt(input.nextLine());
-                    System.out.print("Mời bạn nhập địa chỉ nhân viên : ");
-                    address = input.nextLine();
-                    System.out.print("Mời bạn nhập sđt nhân viên : ");
-                    newPhone = input.nextLine();
-                    System.out.print("Mời bạn nhập email nhân viên : ");
-                    newEmail = input.nextLine();
-                    System.out.print("Mời bạn nhập lương cứng nhân viên : ");
-                    newHardSalary = Double.parseDouble(input.nextLine());
-                    e.setName(newName);
-                    e.setAge(newAge);
-                    e.setAddress(address);
-                    e.setPhoneNumber(newPhone);
-                    ((FullTimeEmployee) e).setEmail(newEmail);
-                    ((FullTimeEmployee) e).setHardSalary(newHardSalary);
-                } else if (e instanceof PartTimeEmployee) {
-                    System.out.print("Mời bạn nhập tên nhân viên : ");
-                    newName = input.nextLine();
-                    System.out.print("Mời bạn nhập tuổi nhân viên : ");
-                    newAge = Integer.parseInt(input.nextLine());
-                    System.out.print("Mời bạn nhập địa chỉ nhân viên : ");
-                    address = input.nextLine();
-                    System.out.print("Mời bạn nhập sđt nhân viên : ");
-                    newPhone = input.nextLine();
-                    System.out.print("Mời bạn nhập số giờ làm việc : ");
-                    double newWorkTime = Integer.parseInt(input.nextLine());
-                    e.setName(newName);
-                    e.setAge(newAge);
-                    e.setAddress(address);
-                    e.setPhoneNumber(newPhone);
-                    ((PartTimeEmployee) e).setWorkingTimes(newWorkTime);
-                }
-            }
-        }
     }
 
     public String totalSalaryAllEmployees() {
@@ -213,5 +161,4 @@ public class ControllerManager {
         });
         readWrite.writeToFileEmployees(employees);
     }
-
 }

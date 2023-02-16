@@ -210,7 +210,7 @@ public class Menu {
                 }
                 case 4 -> {
                     showMessage("Sửa thông tin nhân viên:");
-                    controllerManager.editEmployee(input);
+                    editEmployee();
                 }
                 case 5 -> deleteEmployee();
                 case 6 -> System.out.println(controllerManager.totalSalaryAllEmployees());
@@ -273,6 +273,54 @@ public class Menu {
             default -> showMessageErr("Nhập dữ liệu không đúng !!");
         }
         return null;
+    }
+
+    public void editEmployee() {
+        String newName;
+        int newAge;
+        String address;
+        String newPhone;
+        String newEmail;
+        double newHardSalary;
+        showMessage("Mời bạn nhập vào id nhân viên: ");
+        String id = string();
+        for (Person e : controllerManager.getEmployees()) {
+            if (id.equals(e.getId())) {
+                if (e instanceof FullTimeEmployee) {
+                    showMessage("Mời bạn nhập tên nhân viên : ");
+                    newName = string();
+                    showMessage("Mời bạn nhập tuổi nhân viên : ");
+                    newAge = checkInt();
+                    showMessage("Mời bạn nhập địa chỉ nhân viên : ");
+                    address = string();
+                    newPhone = checkInputPhoneNumber();
+                    newEmail = checkInputEmail();
+                    showMessage("Mời bạn nhập lương cứng nhân viên : ");
+                    newHardSalary = checkDouble();
+                    e.setName(newName);
+                    e.setAge(newAge);
+                    e.setAddress(address);
+                    e.setPhoneNumber(newPhone);
+                    ((FullTimeEmployee) e).setEmail(newEmail);
+                    ((FullTimeEmployee) e).setHardSalary(newHardSalary);
+                } else if (e instanceof PartTimeEmployee) {
+                    showMessage("Mời bạn nhập tên nhân viên : ");
+                    newName = string();
+                    showMessage("Mời bạn nhập tuổi nhân viên : ");
+                    newAge = checkInt();
+                    showMessage("Mời bạn nhập địa chỉ nhân viên : ");
+                    address = string();
+                    newPhone = checkInputPhoneNumber();
+                    showMessage("Mời bạn nhập số giờ làm việc : ");
+                    double newWorkTime = checkInt();
+                    e.setName(newName);
+                    e.setAge(newAge);
+                    e.setAddress(address);
+                    e.setPhoneNumber(newPhone);
+                    ((PartTimeEmployee) e).setWorkingTimes(newWorkTime);
+                }
+            }
+        }
     }
 
     public void checkEmptyEmployee() {
