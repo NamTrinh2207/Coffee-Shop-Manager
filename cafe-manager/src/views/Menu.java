@@ -231,10 +231,12 @@ public class Menu {
 
     public Person addEmployee() {
         showMessage("""
-                Thêm nhân viên mới :
-                1. nhân viên full time
-                2. nhân viên part time
-                0. Quay lại""");
+                +--------THÊM NHÂN VIÊN MỚI--------+
+                |      1. nhân viên full time      |
+                |      2. nhân viên part time      |
+                |      0. Quay lại                 |
+                +----------------------------------+
+                """);
         showMessage("Lựa chọn: ");
         checkInput = Integer.parseInt(input.nextLine());
         switch (checkInput) {
