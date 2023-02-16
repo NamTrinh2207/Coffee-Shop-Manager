@@ -1,7 +1,9 @@
 package views;
-
+import command.*;
+import conCreteCommand.*;
 import controller.ControllerManager;
 import controller.LoginController;
+import invoker.CoffeeApp;
 import model.*;
 
 import java.util.ArrayList;
@@ -10,7 +12,22 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Menu {
-    public static ControllerManager controllerManager = ControllerManager.getInstance();
+    Clients clients = new ListClients(ControllerManager.getInstance());
+    Employees employees = new ListEmployees(ControllerManager.getInstance());
+    CommandClients addNewClient = new AddNewClient(ControllerManager.getInstance());
+    CommandEmployees addNewEmployee = new AddNewEmployee(ControllerManager.getInstance());
+    CommandString deleteByEmploy = new DeleteByEmploy(ControllerManager.getInstance());
+    CommandString salaryPartTime = new SalaryPartTime(ControllerManager.getInstance());
+    CommandString totalMoney = new TotalMoney(ControllerManager.getInstance());
+    CommandString salaryFullTime = new SalaryFullTime(ControllerManager.getInstance());
+    CommandVoid displayClients = new DisplayClients(ControllerManager.getInstance());
+    CommandVoid deleteByEmploys = new DisplayEmployees(ControllerManager.getInstance());
+    CommandVoid sortClient = new SortClient(ControllerManager.getInstance());
+    CommandVoid sortNameEmployees = new SortNameEmployees(ControllerManager.getInstance());
+    TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(ControllerManager.getInstance());
+    CoffeeApp menu = new CoffeeApp(clients,employees,addNewClient,addNewEmployee,deleteByEmploy,displayClients,
+            deleteByEmploys, salaryFullTime,salaryPartTime,sortClient,sortNameEmployees,totalMoney,
+            totalSalaryAllEmployees);
     public Scanner input = new Scanner(System.in);
     public int checkInput;
     public String checkId;
@@ -97,7 +114,7 @@ public class Menu {
             switch (checkInput) {
                 case 1 -> {
                     showMessage("Thêm hóa đơn mới :");
-                    controllerManager.addNewClient(addClient());
+                    menu.addClients(addClient());
                 }
                 case 2 -> {
                     showMessage("Danh sách hóa đơn :");
@@ -105,7 +122,7 @@ public class Menu {
                 }
                 case 3 -> prepareInvoice();
                 case 4 -> {
-                    controllerManager.sortClient();
+                    menu.sortByClients();
                     showMessage("successful arrangement");
                 }
                 case 5 -> {
@@ -124,7 +141,7 @@ public class Menu {
     public void prepareInvoice() {
         showMessage("Nhập id khách hàng muốn tính tiền: ");
         checkId = string();
-        System.out.println(controllerManager.totalMoney(checkId));
+        menu.totalMoney(checkId);
     }
 
     public Client addClient() {
@@ -153,10 +170,10 @@ public class Menu {
     }
 
     public void checkEmptyClients() {
-        if (controllerManager.getClients().size() == 0) {
+        if (menu.listClients().size() == 0) {
             showMessageErr("Danh sách hiện tại đang trống!");
         } else {
-            controllerManager.displayClients();
+            menu.displayClient();
         }
     }
 
@@ -198,10 +215,10 @@ public class Menu {
             switch (checkInput) {
                 case 1 -> {
                     showMessage("Thêm nhân viên:");
-                    controllerManager.addNewEmployee(addEmployee());
+                    menu.addEmployees(addEmployee());
                 }
                 case 2 -> {
-                    controllerManager.sortNameEmployees();
+                    menu.sortByEmployees();
                     showMessage("successful arrangement");
                 }
                 case 3 -> {
@@ -213,7 +230,7 @@ public class Menu {
                     editEmployee();
                 }
                 case 5 -> deleteEmployee();
-                case 6 -> System.out.println(controllerManager.totalSalaryAllEmployees());
+                case 6 -> menu.totalSalaryAllEmployees();
                 case 7 -> salaryEmployeeFullTime();
                 case 8 -> salaryEmployeePartTime();
                 case 9 -> {
@@ -284,7 +301,7 @@ public class Menu {
         double newHardSalary;
         showMessage("Mời bạn nhập vào id nhân viên: ");
         String id = string();
-        for (Person e : controllerManager.getEmployees()) {
+        for (Person e : menu.listEmployees()) {
             if (id.equals(e.getId())) {
                 if (e instanceof FullTimeEmployee) {
                     showMessage("Mời bạn nhập tên nhân viên : ");
@@ -324,40 +341,40 @@ public class Menu {
     }
 
     public void checkEmptyEmployee() {
-        if (controllerManager.getEmployees().size() == 0) {
+        if (menu.listEmployees().size() == 0) {
             showMessageErr("Danh sách hiện tại đang trống!");
         } else {
-            controllerManager.displayEmployees();
+            menu.displayEmployee();
         }
     }
 
     public void deleteEmployee() {
-        if (controllerManager.getEmployees().isEmpty()) {
+        if (menu.listEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
         } else {
             showMessage("Nhập id nhân viên muốn xóa: ");
             checkId = string();
-            controllerManager.deleteByEmploy(checkId);
+            menu.deleteByEmployee(checkId);
         }
     }
 
     public void salaryEmployeeFullTime() {
-        if (controllerManager.getEmployees().isEmpty()) {
+        if (menu.listEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
         } else {
             showMessage("Nhập id nhân viên full time:  ");
             checkId = string();
-            System.out.println(controllerManager.salaryFullTime(checkId));
+            menu.salaryFullTime(checkId);
         }
     }
 
     public void salaryEmployeePartTime() {
-        if (controllerManager.getEmployees().isEmpty()) {
+        if (menu.listEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
         } else {
             showMessage("Nhập id nhân viên part time:  ");
             checkId = string();
-            System.out.println(controllerManager.salaryPartTime(checkId));
+            menu.salaryPartTime(checkId);
         }
     }
 

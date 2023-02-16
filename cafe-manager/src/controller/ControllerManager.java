@@ -1,10 +1,15 @@
 package controller;
 
-import model.*;
+import model.Client;
+import model.FullTimeEmployee;
+import model.PartTimeEmployee;
+import model.Person;
 import storage.ReadWrite;
 import storage.ReadWriteToFile;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class ControllerManager {
@@ -69,7 +74,7 @@ public class ControllerManager {
         return "ib bạn nhập không có trong dánh sách";
     }
 
-    public Object totalMoney(String id) {
+    public String totalMoney(String id) {
         StringBuilder sb = new StringBuilder();
         double sum;
         for (Client p : clients) {
@@ -80,7 +85,7 @@ public class ControllerManager {
                     clients.remove(p);
                     readWrite.writeToFileClient(clients);
                 }
-                return sb;
+                return sb.toString();
             }
         }
         return "Không tìm thấy id khách hàng";
