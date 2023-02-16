@@ -1,12 +1,12 @@
 package conCreteCommand;
 
-import command.CommandVoid;
+import command.CommandVoidDataType;
 import controller.ControllerManager;
 
-public class SortNameEmployees implements CommandVoid {
+public class SortListEmployees implements CommandVoidDataType {
     ControllerManager controllerManager ;
 
-    public SortNameEmployees(ControllerManager controllerManager) {
+    public SortListEmployees(ControllerManager controllerManager) {
         this.controllerManager = controllerManager;
     }
     @Override

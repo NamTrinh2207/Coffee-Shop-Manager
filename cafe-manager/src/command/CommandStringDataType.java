@@ -1,5 +1,5 @@
 package command;
 
-public interface CommandString {
+public interface CommandStringDataType {
     String execute(String id);
 }

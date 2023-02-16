@@ -2,6 +2,6 @@ package command;
 
 import model.Client;
 
-public interface CommandClients {
+public interface CommandAddClients {
     void execute(Client client);
 }

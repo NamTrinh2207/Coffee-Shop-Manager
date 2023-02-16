@@ -4,6 +4,6 @@ import model.Person;
 
 import java.util.List;
 
-public interface Employees {
+public interface CommandListEmployees {
     List<Person> execute();
 }

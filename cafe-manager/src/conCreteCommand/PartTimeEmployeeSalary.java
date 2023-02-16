@@ -1,12 +1,12 @@
 package conCreteCommand;
 
-import command.CommandString;
+import command.CommandStringDataType;
 import controller.ControllerManager;
 
-public class SalaryPartTime implements CommandString {
+public class PartTimeEmployeeSalary implements CommandStringDataType {
     ControllerManager controllerManager ;
 
-    public SalaryPartTime(ControllerManager controllerManager) {
+    public PartTimeEmployeeSalary(ControllerManager controllerManager) {
         this.controllerManager = controllerManager;
     }
 

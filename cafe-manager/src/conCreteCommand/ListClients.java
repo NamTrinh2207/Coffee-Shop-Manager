@@ -1,12 +1,12 @@
 package conCreteCommand;
 
-import command.Clients;
+import command.CommandListClients;
 import controller.ControllerManager;
 import model.Client;
 
 import java.util.List;
 
-public class ListClients implements Clients {
+public class ListClients implements CommandListClients {
     ControllerManager controllerManager;
 
     public ListClients(ControllerManager controllerManager) {

@@ -1,12 +1,12 @@
 package conCreteCommand;
 
-import command.Employees;
+import command.CommandListEmployees;
 import controller.ControllerManager;
 import model.Person;
 
 import java.util.List;
 
-public class ListEmployees implements Employees {
+public class ListEmployees implements CommandListEmployees {
     ControllerManager controllerManager;
 
     public ListEmployees(ControllerManager controllerManager) {

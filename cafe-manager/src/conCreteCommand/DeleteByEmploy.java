@@ -1,9 +1,9 @@
 package conCreteCommand;
 
-import command.CommandString;
+import command.CommandStringDataType;
 import controller.ControllerManager;
 
-public class DeleteByEmploy implements CommandString {
+public class DeleteByEmploy implements CommandStringDataType {
     ControllerManager controllerManager;
 
     public DeleteByEmploy(ControllerManager controllerManager) {

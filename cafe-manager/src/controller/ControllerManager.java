@@ -66,7 +66,7 @@ public class ControllerManager {
         for (Person o : employees) {
             if (id.equals(o.getId())) {
                 employees.remove(o);
-                System.out.println("successful delete by " + o.getFullName());
+                System.out.println("successful delete by " + o.getName());
                 break;
             }
         }
@@ -74,7 +74,7 @@ public class ControllerManager {
         return "ib bạn nhập không có trong dánh sách";
     }
 
-    public String totalMoney(String id) {
+    public String totalBillAmount(String id) {
         StringBuilder sb = new StringBuilder();
         double sum;
         for (Client p : clients) {
@@ -149,7 +149,7 @@ public class ControllerManager {
                 if (nv instanceof PartTimeEmployee) {
                     total = ((PartTimeEmployee) nv).calculateTheAmount();
                     salaryEmployee.append("Nhân viên part time: ").append(nv.getName()).append("; Thực lĩnh: ").
-                            append((long) total);
+                            append((long) total).append(" VNĐ");
                     return salaryEmployee.toString();
                 }
             }

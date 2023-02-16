@@ -1,17 +1,17 @@
 package conCreteCommand;
 
-import command.CommandString;
+import command.CommandStringDataType;
 import controller.ControllerManager;
 
-public class TotalMoney implements CommandString {
+public class TotalBillAmount implements CommandStringDataType {
     ControllerManager controllerManager;
 
-    public TotalMoney(ControllerManager controllerManager) {
+    public TotalBillAmount(ControllerManager controllerManager) {
         this.controllerManager = controllerManager;
     }
 
     @Override
     public String execute(String id) {
-        return controllerManager.totalMoney(id);
+        return controllerManager.totalBillAmount(id);
     }
 }

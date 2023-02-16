@@ -1,10 +1,10 @@
 package conCreteCommand;
 
-import command.CommandEmployees;
+import command.CommandAddEmployee;
 import controller.ControllerManager;
 import model.Person;
 
-public class AddNewEmployee implements CommandEmployees {
+public class AddNewEmployee implements CommandAddEmployee {
     ControllerManager controller;
 
     public AddNewEmployee(ControllerManager controller) {

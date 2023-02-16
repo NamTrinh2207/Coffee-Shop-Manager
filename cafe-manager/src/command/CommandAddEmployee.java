@@ -2,6 +2,6 @@ package command;
 
 import model.Person;
 
-public interface CommandEmployees {
+public interface CommandAddEmployee {
     void execute(Person employee);
 }

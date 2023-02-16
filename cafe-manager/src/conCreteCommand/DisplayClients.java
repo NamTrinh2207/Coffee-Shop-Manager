@@ -1,9 +1,9 @@
 package conCreteCommand;
 
-import command.CommandVoid;
+import command.CommandVoidDataType;
 import controller.ControllerManager;
 
-public class DisplayClients implements CommandVoid {
+public class DisplayClients implements CommandVoidDataType {
     ControllerManager controllerManager ;
 
     public DisplayClients(ControllerManager controllerManager) {

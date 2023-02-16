@@ -1,5 +1,6 @@
 package views;
 import command.*;
+import command.CommandListClients;
 import conCreteCommand.*;
 import controller.ControllerManager;
 import controller.LoginController;
@@ -12,18 +13,18 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Menu {
-    Clients clients = new ListClients(ControllerManager.getInstance());
-    Employees employees = new ListEmployees(ControllerManager.getInstance());
-    CommandClients addNewClient = new AddNewClient(ControllerManager.getInstance());
-    CommandEmployees addNewEmployee = new AddNewEmployee(ControllerManager.getInstance());
-    CommandString deleteByEmploy = new DeleteByEmploy(ControllerManager.getInstance());
-    CommandString salaryPartTime = new SalaryPartTime(ControllerManager.getInstance());
-    CommandString totalMoney = new TotalMoney(ControllerManager.getInstance());
-    CommandString salaryFullTime = new SalaryFullTime(ControllerManager.getInstance());
-    CommandVoid displayClients = new DisplayClients(ControllerManager.getInstance());
-    CommandVoid deleteByEmploys = new DisplayEmployees(ControllerManager.getInstance());
-    CommandVoid sortClient = new SortClient(ControllerManager.getInstance());
-    CommandVoid sortNameEmployees = new SortNameEmployees(ControllerManager.getInstance());
+    CommandListClients clients = new conCreteCommand.ListClients(ControllerManager.getInstance());
+    CommandListEmployees employees = new ListEmployees(ControllerManager.getInstance());
+    CommandAddClients addNewClient = new AddNewClient(ControllerManager.getInstance());
+    CommandAddEmployee addNewEmployee = new AddNewEmployee(ControllerManager.getInstance());
+    CommandStringDataType deleteByEmploy = new DeleteByEmploy(ControllerManager.getInstance());
+    CommandStringDataType salaryPartTime = new PartTimeEmployeeSalary(ControllerManager.getInstance());
+    CommandStringDataType totalMoney = new TotalBillAmount(ControllerManager.getInstance());
+    CommandStringDataType salaryFullTime = new FullTimeEmployeeSalary(ControllerManager.getInstance());
+    CommandVoidDataType displayClients = new DisplayClients(ControllerManager.getInstance());
+    CommandVoidDataType deleteByEmploys = new DisplayEmployees(ControllerManager.getInstance());
+    CommandVoidDataType sortClient = new SortListClients(ControllerManager.getInstance());
+    CommandVoidDataType sortNameEmployees = new SortListEmployees(ControllerManager.getInstance());
     TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(ControllerManager.getInstance());
     CoffeeApp menu = new CoffeeApp(clients,employees,addNewClient,addNewEmployee,deleteByEmploy,displayClients,
             deleteByEmploys, salaryFullTime,salaryPartTime,sortClient,sortNameEmployees,totalMoney,

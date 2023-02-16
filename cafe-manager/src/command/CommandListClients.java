@@ -4,6 +4,6 @@ import model.Client;
 
 import java.util.List;
 
-public interface Clients {
+public interface CommandListClients {
     List<Client> execute();
 }

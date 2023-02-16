@@ -1,9 +1,8 @@
 package conCreteCommand;
-
-import command.TotalSalaryEmployees;
+import command.CommandTotalEmployeeSalary;
 import controller.ControllerManager;
 
-public class TotalSalaryAllEmployees implements TotalSalaryEmployees {
+public class TotalSalaryAllEmployees implements CommandTotalEmployeeSalary {
     ControllerManager controllerManager ;
 
     public TotalSalaryAllEmployees(ControllerManager controllerManager) {

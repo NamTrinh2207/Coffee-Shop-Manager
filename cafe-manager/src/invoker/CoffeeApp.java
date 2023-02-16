@@ -7,27 +7,27 @@ import model.Person;
 import java.util.List;
 
 public class CoffeeApp {
-    private Clients clients;
-    private Employees employees;
-    private CommandClients addClients;
-    private CommandEmployees addEmployees;
-    private CommandString deleteByEmployee;
-    private CommandVoid displayClient;
-    private CommandVoid displayEmployee;
-    private CommandString salaryFullTime;
-    private CommandString salaryPartTime;
-    private CommandVoid sortClient;
-    private CommandVoid sortNameEmployees;
-    private CommandString totalMoney;
-    private TotalSalaryEmployees totalSalaryAllEmployees;
+    private CommandListClients clients;
+    private CommandListEmployees employees;
+    private CommandAddClients addClients;
+    private CommandAddEmployee addEmployees;
+    private CommandStringDataType deleteByEmployee;
+    private CommandVoidDataType displayClient;
+    private CommandVoidDataType displayEmployee;
+    private CommandStringDataType salaryFullTime;
+    private CommandStringDataType salaryPartTime;
+    private CommandVoidDataType sortClient;
+    private CommandVoidDataType sortNameEmployees;
+    private CommandStringDataType totalMoney;
+    private CommandTotalEmployeeSalary totalSalaryAllEmployees;
 
     public CoffeeApp() {
     }
 
-    public CoffeeApp(Clients clients, Employees employees, CommandClients addClients, CommandEmployees addEmployees,
-                     CommandString deleteByEmployee, CommandVoid displayClient, CommandVoid displayEmployee,
-                     CommandString salaryFullTime, CommandString salaryPartTime, CommandVoid sortClient,
-                     CommandVoid sortNameEmployees, CommandString totalMoney, TotalSalaryEmployees
+    public CoffeeApp(CommandListClients clients, CommandListEmployees employees, CommandAddClients addClients, CommandAddEmployee addEmployees,
+                     CommandStringDataType deleteByEmployee, CommandVoidDataType displayClient, CommandVoidDataType displayEmployee,
+                     CommandStringDataType salaryFullTime, CommandStringDataType salaryPartTime, CommandVoidDataType sortClient,
+                     CommandVoidDataType sortNameEmployees, CommandStringDataType totalMoney, CommandTotalEmployeeSalary
                            totalSalaryAllEmployees) {
         this.clients = clients;
         this.employees = employees;

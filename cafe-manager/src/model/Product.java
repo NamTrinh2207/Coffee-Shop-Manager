@@ -43,6 +43,6 @@ public class Product implements Serializable {
                 " Cà Phê: " +
                         "  Tên : " + name +
                         ",  Giá : " + price + " VNĐ" +
-                        ",  Số lượng : " + quantity + "\n";
+                        ",  Số lượng : " + quantity + " cốc" + "\n";
     }
 }

@@ -1,5 +1,5 @@
 package command;
 
-public interface CommandVoid {
+public interface CommandVoidDataType {
     void execute();
 }
