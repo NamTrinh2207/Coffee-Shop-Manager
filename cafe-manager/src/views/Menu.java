@@ -26,9 +26,10 @@ public class Menu {
     CommandVoidDataType sortClient = new SortListClients(ControllerManager.getInstance());
     CommandVoidDataType sortNameEmployees = new SortListEmployees(ControllerManager.getInstance());
     TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(ControllerManager.getInstance());
-    CoffeeApp menu = new CoffeeApp(clients,employees,addNewClient,addNewEmployee,deleteByEmploy,displayClients,
-            deleteByEmploys, salaryFullTime,salaryPartTime,sortClient,sortNameEmployees,totalMoney,
-            totalSalaryAllEmployees);
+    CommandEditEmployees editEmployees = new EditEmployee(ControllerManager.getInstance());
+    CoffeeApp menu = new CoffeeApp(clients, employees, addNewClient, addNewEmployee, deleteByEmploy, displayClients,
+            deleteByEmploys, salaryFullTime, salaryPartTime, sortClient, sortNameEmployees, totalMoney,
+            totalSalaryAllEmployees, editEmployees);
     public Scanner input = new Scanner(System.in);
     public int checkInput;
     public String checkId;
@@ -300,6 +301,7 @@ public class Menu {
         String newPhone;
         String newEmail;
         double newHardSalary;
+        Person employee;
         showMessage("Mời bạn nhập vào id nhân viên: ");
         String id = string();
         for (Person e : menu.listEmployees()) {
@@ -315,12 +317,8 @@ public class Menu {
                     newEmail = checkInputEmail();
                     showMessage("Mời bạn nhập lương cứng nhân viên : ");
                     newHardSalary = checkDouble();
-                    e.setName(newName);
-                    e.setAge(newAge);
-                    e.setAddress(address);
-                    e.setPhoneNumber(newPhone);
-                    ((FullTimeEmployee) e).setEmail(newEmail);
-                    ((FullTimeEmployee) e).setHardSalary(newHardSalary);
+                    employee = new FullTimeEmployee(id, newName, newAge, address, newPhone, newEmail, newHardSalary);
+                    menu.editEmployee(employee, id);
                 } else if (e instanceof PartTimeEmployee) {
                     showMessage("Mời bạn nhập tên nhân viên : ");
                     newName = string();
@@ -331,11 +329,8 @@ public class Menu {
                     newPhone = checkInputPhoneNumber();
                     showMessage("Mời bạn nhập số giờ làm việc : ");
                     double newWorkTime = checkInt();
-                    e.setName(newName);
-                    e.setAge(newAge);
-                    e.setAddress(address);
-                    e.setPhoneNumber(newPhone);
-                    ((PartTimeEmployee) e).setWorkingTimes(newWorkTime);
+                    employee = new PartTimeEmployee(id, newName, newAge, address, newPhone, newWorkTime);
+                    menu.editEmployee(employee, id);
                 }
             }
         }

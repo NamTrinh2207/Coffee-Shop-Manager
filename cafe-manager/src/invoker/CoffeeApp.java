@@ -20,6 +20,7 @@ public class CoffeeApp {
     private CommandVoidDataType sortNameEmployees;
     private CommandStringDataType totalMoney;
     private CommandTotalEmployeeSalary totalSalaryAllEmployees;
+    private CommandEditEmployees editEmployees;
 
     public CoffeeApp() {
     }
@@ -28,7 +29,7 @@ public class CoffeeApp {
                      CommandStringDataType deleteByEmployee, CommandVoidDataType displayClient, CommandVoidDataType displayEmployee,
                      CommandStringDataType salaryFullTime, CommandStringDataType salaryPartTime, CommandVoidDataType sortClient,
                      CommandVoidDataType sortNameEmployees, CommandStringDataType totalMoney, CommandTotalEmployeeSalary
-                           totalSalaryAllEmployees) {
+                           totalSalaryAllEmployees,CommandEditEmployees editEmployees) {
         this.clients = clients;
         this.employees = employees;
         this.addClients = addClients;
@@ -42,6 +43,8 @@ public class CoffeeApp {
         this.sortNameEmployees = sortNameEmployees;
         this.totalMoney = totalMoney;
         this.totalSalaryAllEmployees = totalSalaryAllEmployees;
+        this.editEmployees = editEmployees;
+
     }
 
     public List<Client> listClients() {
@@ -94,6 +97,9 @@ public class CoffeeApp {
 
     public void salaryPartTime(String id) {
         System.out.println(salaryPartTime.execute(id));
+    }
+    public void editEmployee(Person employee, String id) {
+        editEmployees.execute(employee,id);
     }
 
 

@@ -71,7 +71,7 @@ public class ControllerManager {
             }
         }
         readWrite.writeToFileEmployees(employees);
-        return "ib bạn nhập không có trong dánh sách";
+        return " ";
     }
 
     public String totalBillAmount(String id) {
@@ -164,6 +164,15 @@ public class ControllerManager {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+        readWrite.writeToFileEmployees(employees);
+    }
+    public void editEmployee(Person employee, String id) {
+        for (int i = 0; i < employees.size(); i++) {
+            if (id.equals(employees.get(i).getId())) {
+                employees.set(i, employee);
+                break;
+            }
+        }
         readWrite.writeToFileEmployees(employees);
     }
 }
