@@ -1,5 +1,6 @@
-package controller;
+package controller.controllerLogin;
 
+import controller.manager.ControllerManager;
 import model.LoginModel;
 import model.Person;
 import views.LoginView;

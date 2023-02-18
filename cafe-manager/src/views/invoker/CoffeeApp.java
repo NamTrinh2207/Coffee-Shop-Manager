@@ -1,6 +1,6 @@
-package invoker;
+package views.invoker;
 
-import command.*;
+import controller.command.*;
 import model.Client;
 import model.Person;
 

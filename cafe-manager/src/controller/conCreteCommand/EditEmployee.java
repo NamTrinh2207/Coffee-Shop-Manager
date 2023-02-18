@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandEditEmployees;
-import controller.ControllerManager;
+import controller.command.CommandEditEmployees;
+import controller.manager.ControllerManager;
 import model.Person;
 
 public class EditEmployee implements CommandEditEmployees {

@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandListEmployees;
-import controller.ControllerManager;
+import controller.command.CommandListEmployees;
+import controller.manager.ControllerManager;
 import model.Person;
 
 import java.util.List;

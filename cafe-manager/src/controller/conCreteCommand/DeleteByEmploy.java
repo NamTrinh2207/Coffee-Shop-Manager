@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandStringDataType;
-import controller.ControllerManager;
+import controller.command.CommandStringDataType;
+import controller.manager.ControllerManager;
 
 public class DeleteByEmploy implements CommandStringDataType {
     ControllerManager controllerManager;

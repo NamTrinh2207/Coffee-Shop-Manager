@@ -1,4 +1,4 @@
-package controller;
+package controller.manager;
 
 import model.Client;
 import model.FullTimeEmployee;
@@ -71,7 +71,7 @@ public class ControllerManager {
             }
         }
         readWrite.writeToFileEmployees(employees);
-        return " ";
+        return "";
     }
 
     public String totalBillAmount(String id) {
@@ -80,7 +80,8 @@ public class ControllerManager {
         for (Client p : clients) {
             if (id.trim().equals(p.getId())) {
                 sum = p.calculateTheAmount();
-                sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").append((long) sum).append(" VNĐ");
+                sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").
+                        append((long) sum).append(" VNĐ");
                 if (clients != null) {
                     clients.remove(p);
                     readWrite.writeToFileClient(clients);
@@ -166,6 +167,7 @@ public class ControllerManager {
         });
         readWrite.writeToFileEmployees(employees);
     }
+
     public void editEmployee(Person employee, String id) {
         for (int i = 0; i < employees.size(); i++) {
             if (id.equals(employees.get(i).getId())) {

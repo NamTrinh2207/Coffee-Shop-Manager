@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandVoidDataType;
-import controller.ControllerManager;
+import controller.command.CommandVoidDataType;
+import controller.manager.ControllerManager;
 
 public class DisplayClients implements CommandVoidDataType {
     ControllerManager controllerManager ;

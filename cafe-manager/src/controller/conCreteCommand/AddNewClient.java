@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandAddClients;
-import controller.ControllerManager;
+import controller.command.CommandAddClients;
+import controller.manager.ControllerManager;
 import model.Client;
 
 public class AddNewClient implements CommandAddClients {

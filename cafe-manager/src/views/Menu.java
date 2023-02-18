@@ -1,10 +1,11 @@
 package views;
-import command.*;
-import command.CommandListClients;
-import conCreteCommand.*;
-import controller.ControllerManager;
-import controller.LoginController;
-import invoker.CoffeeApp;
+
+import controller.command.*;
+import controller.command.CommandListClients;
+import controller.conCreteCommand.*;
+import controller.manager.ControllerManager;
+import controller.controllerLogin.LoginController;
+import views.invoker.CoffeeApp;
 import model.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Menu {
-    CommandListClients clients = new conCreteCommand.ListClients(ControllerManager.getInstance());
+    CommandListClients clients = new controller.conCreteCommand.ListClients(ControllerManager.getInstance());
     CommandListEmployees employees = new ListEmployees(ControllerManager.getInstance());
     CommandAddClients addNewClient = new AddNewClient(ControllerManager.getInstance());
     CommandAddEmployee addNewEmployee = new AddNewEmployee(ControllerManager.getInstance());

@@ -1,7 +1,7 @@
-package conCreteCommand;
+package controller.conCreteCommand;
 
-import command.CommandListClients;
-import controller.ControllerManager;
+import controller.command.CommandListClients;
+import controller.manager.ControllerManager;
 import model.Client;
 
 import java.util.List;
