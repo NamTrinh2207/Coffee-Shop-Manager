@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.Person;
+import model.modelClass.Person;
 
 public interface CommandAddEmployee {
     void execute(Person employee);

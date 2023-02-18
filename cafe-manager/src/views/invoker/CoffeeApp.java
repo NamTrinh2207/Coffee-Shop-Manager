@@ -1,8 +1,8 @@
 package views.invoker;
 
 import controller.command.*;
-import model.Client;
-import model.Person;
+import model.modelClass.Client;
+import model.modelClass.Person;
 
 import java.util.List;
 

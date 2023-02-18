@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.Person;
+import model.modelClass.Person;
 
 import java.util.List;
 

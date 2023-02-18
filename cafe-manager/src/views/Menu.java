@@ -2,11 +2,10 @@ package views;
 
 import controller.command.*;
 import controller.command.CommandListClients;
-import controller.conCreteCommand.*;
-import controller.manager.ControllerManager;
-import controller.controllerLogin.LoginController;
+import controller.concreteCommand.*;
+import controller.managerController.Manager;
+import model.modelClass.*;
 import views.invoker.CoffeeApp;
-import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +13,20 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Menu {
-    CommandListClients clients = new controller.conCreteCommand.ListClients(ControllerManager.getInstance());
-    CommandListEmployees employees = new ListEmployees(ControllerManager.getInstance());
-    CommandAddClients addNewClient = new AddNewClient(ControllerManager.getInstance());
-    CommandAddEmployee addNewEmployee = new AddNewEmployee(ControllerManager.getInstance());
-    CommandStringDataType deleteByEmploy = new DeleteByEmploy(ControllerManager.getInstance());
-    CommandStringDataType salaryPartTime = new PartTimeEmployeeSalary(ControllerManager.getInstance());
-    CommandStringDataType totalMoney = new TotalBillAmount(ControllerManager.getInstance());
-    CommandStringDataType salaryFullTime = new FullTimeEmployeeSalary(ControllerManager.getInstance());
-    CommandVoidDataType displayClients = new DisplayClients(ControllerManager.getInstance());
-    CommandVoidDataType deleteByEmploys = new DisplayEmployees(ControllerManager.getInstance());
-    CommandVoidDataType sortClient = new SortListClients(ControllerManager.getInstance());
-    CommandVoidDataType sortNameEmployees = new SortListEmployees(ControllerManager.getInstance());
-    TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(ControllerManager.getInstance());
-    CommandEditEmployees editEmployees = new EditEmployee(ControllerManager.getInstance());
+    CommandListClients clients = new controller.concreteCommand.ListClients(Manager.getInstance());
+    CommandListEmployees employees = new ListEmployees(Manager.getInstance());
+    CommandAddClients addNewClient = new AddNewClient(Manager.getInstance());
+    CommandAddEmployee addNewEmployee = new AddNewEmployee(Manager.getInstance());
+    CommandStringDataType deleteByEmploy = new DeleteByEmploy(Manager.getInstance());
+    CommandStringDataType salaryPartTime = new PartTimeEmployeeSalary(Manager.getInstance());
+    CommandStringDataType totalMoney = new TotalBillAmount(Manager.getInstance());
+    CommandStringDataType salaryFullTime = new FullTimeEmployeeSalary(Manager.getInstance());
+    CommandVoidDataType displayClients = new DisplayClients(Manager.getInstance());
+    CommandVoidDataType deleteByEmploys = new DisplayEmployees(Manager.getInstance());
+    CommandVoidDataType sortClient = new SortListClients(Manager.getInstance());
+    CommandVoidDataType sortNameEmployees = new SortListEmployees(Manager.getInstance());
+    TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(Manager.getInstance());
+    CommandEditEmployees editEmployees = new EditEmployee(Manager.getInstance());
     CoffeeApp menu = new CoffeeApp(clients, employees, addNewClient, addNewEmployee, deleteByEmploy, displayClients,
             deleteByEmploys, salaryFullTime, salaryPartTime, sortClient, sortNameEmployees, totalMoney,
             totalSalaryAllEmployees, editEmployees);
@@ -88,14 +87,14 @@ public class Menu {
     }
 
     public void userLogin() {
-        LoginView view = new LoginView();
-        LoginController control = new LoginController(view);
+        Login view = new Login();
+        controller.loginController.Login control = new controller.loginController.Login(view);
         control.userLogin();
     }
 
     public void adminLogin() {
-        LoginView view = new LoginView();
-        LoginController control = new LoginController(view);
+        Login view = new Login();
+        controller.loginController.Login control = new controller.loginController.Login(view);
         control.AdminLogin();
     }
     //Client--------------------------------------------------------------------------------------------
@@ -115,19 +114,10 @@ public class Menu {
             showMessage("Lựa chọn: ");
             checkInput = checkInt();
             switch (checkInput) {
-                case 1 -> {
-                    showMessage("Thêm hóa đơn mới :");
-                    menu.addClients(addClient());
-                }
-                case 2 -> {
-                    showMessage("Danh sách hóa đơn :");
-                    checkEmptyClients();
-                }
+                case 1 -> menu.addClients(addClient());
+                case 2 -> checkEmptyClients();
                 case 3 -> prepareInvoice();
-                case 4 -> {
-                    menu.sortByClients();
-                    showMessage("successful arrangement");
-                }
+                case 4 -> sortByClients();
                 case 5 -> {
                     showMessage("successful logout");
                     menu();
@@ -142,9 +132,13 @@ public class Menu {
     }
 
     public void prepareInvoice() {
-        showMessage("Nhập id khách hàng muốn tính tiền: ");
-        checkId = string();
-        menu.totalMoney(checkId);
+        if (menu.listClients().isEmpty()){
+            showMessageErr("Danh sách khách hàng đang trống!!!");
+        }else {
+            showMessage("Nhập id khách hàng muốn tính tiền: ");
+            checkId = string();
+            menu.totalMoney(checkId);
+        }
     }
 
     public Client addClient() {
@@ -160,7 +154,7 @@ public class Menu {
         int sp = checkInt();
         List<Product> products = new ArrayList<>();
         for (int i = 1; i <= sp; i++) {
-            showMessage("thêm sản phẩm thứ " + i + ":");
+            showMessage("Thêm sản phẩm thứ " + i + ":");
             showMessage("Tên cà phê: ");
             String nameSP = string();
             showMessage("Giá : ");
@@ -179,11 +173,19 @@ public class Menu {
             menu.displayClient();
         }
     }
+    public void sortByClients(){
+        if (menu.listClients().isEmpty()){
+            showMessageErr("Danh sách hiện tại đang trống!!!");
+        }else {
+            menu.sortByClients();
+            showMessage("successful arrangement");
+        }
+    }
 
     public String checkCustomerId() {
         showMessage("Nhập mã khách hàng:");
         String id = string();
-        for (Client o : ControllerManager.getInstance().getClients()) {
+        for (Client o : Manager.getInstance().getClients()) {
             while (true) {
                 if (o.getId().equals(id)) {
                     showMessageErr("id bạn nhập đã có trong danh sách ! Vui lòng nhập lại");
@@ -217,19 +219,16 @@ public class Menu {
             checkInput = checkInt();
             switch (checkInput) {
                 case 1 -> {
-                    showMessage("Thêm nhân viên:");
+                    showMessage("Thêm nhân viên");
                     menu.addEmployees(addEmployee());
                 }
                 case 2 -> {
                     menu.sortByEmployees();
                     showMessage("successful arrangement");
                 }
-                case 3 -> {
-                    showMessage("Danh sách nhân viên :");
-                    checkEmptyEmployee();
-                }
+                case 3 -> checkEmptyEmployee();
                 case 4 -> {
-                    showMessage("Sửa thông tin nhân viên:");
+                    showMessage("Sửa thông tin nhân viên");
                     editEmployee();
                 }
                 case 5 -> deleteEmployee();
@@ -377,7 +376,7 @@ public class Menu {
 
     public String checkEmployeeId() {
         String id = string();
-        for (Person o : ControllerManager.getInstance().getEmployees()) {
+        for (Person o : Manager.getInstance().getEmployees()) {
             while (true) {
                 if (o.getId().equals(id)) {
                     showMessageErr("id này đã có trong danh sách ! Vui lòng nhập lại");
