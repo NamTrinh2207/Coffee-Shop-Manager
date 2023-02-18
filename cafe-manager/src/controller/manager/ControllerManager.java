@@ -4,8 +4,8 @@ import model.Client;
 import model.FullTimeEmployee;
 import model.PartTimeEmployee;
 import model.Person;
-import storage.ReadWrite;
-import storage.ReadWriteToFile;
+import controller.storage.ReadWrite;
+import controller.storage.ReadWriteToFile;
 
 import java.util.Comparator;
 import java.util.List;

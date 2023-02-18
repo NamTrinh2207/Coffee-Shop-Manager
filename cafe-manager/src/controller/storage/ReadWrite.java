@@ -1,4 +1,4 @@
-package storage;
+package controller.storage;
 
 import model.Client;
 import model.Person;
