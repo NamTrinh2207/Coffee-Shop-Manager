@@ -2,7 +2,7 @@ package controller.concreteCommand;
 
 import controller.command.CommandListEmployees;
 import controller.managerController.Manager;
-import model.modelClass.Person;
+import model.classModel.Person;
 
 import java.util.List;
 

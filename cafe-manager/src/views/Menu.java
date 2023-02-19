@@ -4,7 +4,7 @@ import controller.command.*;
 import controller.command.CommandListClients;
 import controller.concreteCommand.*;
 import controller.managerController.Manager;
-import model.modelClass.*;
+import model.classModel.*;
 import views.invoker.CoffeeApp;
 
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class Menu {
     CommandListClients clients = new controller.concreteCommand.ListClients(Manager.getInstance());
     CommandListEmployees employees = new ListEmployees(Manager.getInstance());
+    CommandListClients listInvoiceHistory = new ListInvoiceHistory(Manager.getInstance());
     CommandAddClients addNewClient = new AddNewClient(Manager.getInstance());
     CommandAddEmployee addNewEmployee = new AddNewEmployee(Manager.getInstance());
     CommandStringDataType deleteByEmploy = new DeleteByEmploy(Manager.getInstance());
@@ -25,11 +26,11 @@ public class Menu {
     CommandVoidDataType deleteByEmploys = new DisplayEmployees(Manager.getInstance());
     CommandVoidDataType sortClient = new SortListClients(Manager.getInstance());
     CommandVoidDataType sortNameEmployees = new SortListEmployees(Manager.getInstance());
+    CommandVoidDataType deleteInvoiceHistory = new DeleteInvoiceHistory(Manager.getInstance());
+    CommandVoidDataType displayInvoiceHistory = new DisplayInvoiceHistory(Manager.getInstance());
     TotalSalaryAllEmployees totalSalaryAllEmployees = new TotalSalaryAllEmployees(Manager.getInstance());
     CommandEditEmployees editEmployees = new EditEmployee(Manager.getInstance());
-    CoffeeApp menu = new CoffeeApp(clients, employees, addNewClient, addNewEmployee, deleteByEmploy, displayClients,
-            deleteByEmploys, salaryFullTime, salaryPartTime, sortClient, sortNameEmployees, totalMoney,
-            totalSalaryAllEmployees, editEmployees);
+    CoffeeApp menu = new CoffeeApp(clients, listInvoiceHistory, employees, addNewClient, addNewEmployee, deleteByEmploy, displayClients, deleteByEmploys, salaryFullTime, salaryPartTime, sortClient, sortNameEmployees, totalMoney, totalSalaryAllEmployees, editEmployees, displayInvoiceHistory, deleteInvoiceHistory);
     public Scanner input = new Scanner(System.in);
     public int checkInput;
     public String checkId;
@@ -107,7 +108,9 @@ public class Menu {
                     |    2. Danh sách hóa đơn                       |
                     |    3. Tính tiền theo id khách hàng            |
                     |    4. Sắp xếp hóa đơn theo tên khách hàng     |
-                    |    5. Đăng xuất                               |
+                    |    5. Lịch sử hóa đơn mua hàng                |
+                    |    6. Xóa toàn bộ lịch sử hóa đơn mua hàng    |
+                    |    7. Đăng xuất                               |
                     |    0. Thoát                                   |
                     +-----------------------------------------------+
                     """);
@@ -118,7 +121,9 @@ public class Menu {
                 case 2 -> checkEmptyClients();
                 case 3 -> prepareInvoice();
                 case 4 -> sortByClients();
-                case 5 -> {
+                case 5 -> showInvoiceHistory();
+                case 6 -> deleteAllInvoiceHistory();
+                case 7 -> {
                     showMessage("successful logout");
                     menu();
                 }
@@ -132,9 +137,9 @@ public class Menu {
     }
 
     public void prepareInvoice() {
-        if (menu.listClients().isEmpty()){
+        if (menu.listClients().isEmpty()) {
             showMessageErr("Danh sách khách hàng đang trống!!!");
-        }else {
+        } else {
             showMessage("Nhập id khách hàng muốn tính tiền: ");
             checkId = string();
             menu.totalMoney(checkId);
@@ -173,12 +178,30 @@ public class Menu {
             menu.displayClient();
         }
     }
-    public void sortByClients(){
-        if (menu.listClients().isEmpty()){
+
+    public void sortByClients() {
+        if (menu.listClients().isEmpty()) {
             showMessageErr("Danh sách hiện tại đang trống!!!");
-        }else {
+        } else {
             menu.sortByClients();
             showMessage("successful arrangement");
+        }
+    }
+
+    public void showInvoiceHistory() {
+        if (menu.listInvoiceHistory().isEmpty()) {
+            showMessageErr("Lịch sử hóa đơn trống!");
+        } else {
+            menu.displayInvoiceHistory();
+        }
+    }
+
+    public void deleteAllInvoiceHistory() {
+        if (menu.listInvoiceHistory().isEmpty()) {
+            showMessageErr("Danh sách trống!");
+        } else {
+            menu.deleteInvoiceHistory();
+            showMessage("Deleted all invoice history");
         }
     }
 
@@ -222,13 +245,9 @@ public class Menu {
                     showMessage("Thêm nhân viên");
                     menu.addEmployees(addEmployee());
                 }
-                case 2 -> {
-                    menu.sortByEmployees();
-                    showMessage("successful arrangement");
-                }
+                case 2 -> sortByEmployees();
                 case 3 -> checkEmptyEmployee();
                 case 4 -> {
-                    showMessage("Sửa thông tin nhân viên");
                     editEmployee();
                 }
                 case 5 -> deleteEmployee();
@@ -295,43 +314,48 @@ public class Menu {
     }
 
     public void editEmployee() {
-        String newName;
-        int newAge;
-        String address;
-        String newPhone;
-        String newEmail;
-        double newHardSalary;
-        Person employee;
-        showMessage("Mời bạn nhập vào id nhân viên: ");
-        String id = string();
-        for (Person e : menu.listEmployees()) {
-            if (id.equals(e.getId())) {
-                if (e instanceof FullTimeEmployee) {
-                    showMessage("Mời bạn nhập tên nhân viên : ");
-                    newName = string();
-                    showMessage("Mời bạn nhập tuổi nhân viên : ");
-                    newAge = checkInt();
-                    showMessage("Mời bạn nhập địa chỉ nhân viên : ");
-                    address = string();
-                    newPhone = checkInputPhoneNumber();
-                    newEmail = checkInputEmail();
-                    showMessage("Mời bạn nhập lương cứng nhân viên : ");
-                    newHardSalary = checkDouble();
-                    employee = new FullTimeEmployee(id, newName, newAge, address, newPhone, newEmail, newHardSalary);
-                    menu.editEmployee(employee, id);
-                } else if (e instanceof PartTimeEmployee) {
-                    showMessage("Mời bạn nhập tên nhân viên : ");
-                    newName = string();
-                    showMessage("Mời bạn nhập tuổi nhân viên : ");
-                    newAge = checkInt();
-                    showMessage("Mời bạn nhập địa chỉ nhân viên : ");
-                    address = string();
-                    newPhone = checkInputPhoneNumber();
-                    showMessage("Mời bạn nhập số giờ làm việc : ");
-                    double newWorkTime = checkInt();
-                    employee = new PartTimeEmployee(id, newName, newAge, address, newPhone, newWorkTime);
-                    menu.editEmployee(employee, id);
+        if (menu.listEmployees().isEmpty()) {
+            showMessageErr("Danh sách trống!");
+        } else {
+            String newName;
+            int newAge;
+            String address;
+            String newPhone;
+            String newEmail;
+            double newHardSalary;
+            Person employee;
+            showMessage("Mời bạn nhập vào id nhân viên: ");
+            String id = string();
+            for (Person e : menu.listEmployees()) {
+                if (id.equals(e.getId())) {
+                    if (e instanceof FullTimeEmployee) {
+                        showMessage("Mời bạn nhập tên nhân viên : ");
+                        newName = string();
+                        showMessage("Mời bạn nhập tuổi nhân viên : ");
+                        newAge = checkInt();
+                        showMessage("Mời bạn nhập địa chỉ nhân viên : ");
+                        address = string();
+                        newPhone = checkInputPhoneNumber();
+                        newEmail = checkInputEmail();
+                        showMessage("Mời bạn nhập lương cứng nhân viên : ");
+                        newHardSalary = checkDouble();
+                        employee = new FullTimeEmployee(id, newName, newAge, address, newPhone, newEmail, newHardSalary);
+                        menu.editEmployee(employee, id);
+                    } else if (e instanceof PartTimeEmployee) {
+                        showMessage("Mời bạn nhập tên nhân viên : ");
+                        newName = string();
+                        showMessage("Mời bạn nhập tuổi nhân viên : ");
+                        newAge = checkInt();
+                        showMessage("Mời bạn nhập địa chỉ nhân viên : ");
+                        address = string();
+                        newPhone = checkInputPhoneNumber();
+                        showMessage("Mời bạn nhập số giờ làm việc : ");
+                        double newWorkTime = checkInt();
+                        employee = new PartTimeEmployee(id, newName, newAge, address, newPhone, newWorkTime);
+                        menu.editEmployee(employee, id);
+                    }
                 }
+
             }
         }
     }
@@ -364,6 +388,15 @@ public class Menu {
         }
     }
 
+    public void sortByEmployees() {
+        if (menu.listEmployees().isEmpty()) {
+            showMessageErr("Danh sách trống");
+        } else {
+            menu.sortByEmployees();
+            showMessage("successful arrangement");
+        }
+    }
+
     public void salaryEmployeePartTime() {
         if (menu.listEmployees().isEmpty()) {
             showMessageErr("Danh sách trống!");
@@ -391,29 +424,33 @@ public class Menu {
 
     //check input-------------------------------------------------------------------------------------------------
     public String string() {
-        try {
-            return input.nextLine();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return null;
+        while (true) {
+            try {
+                return input.nextLine();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
+
     }
 
     public int checkInt() {
-        try {
-            return Integer.parseInt(input.nextLine());
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return -1;
+        while (true) {
+            try {
+                return Integer.parseInt(input.nextLine());
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 
     public double checkDouble() {
-        try {
-            return Double.parseDouble(input.nextLine());
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return -1;
+        while (true) {
+            try {
+                return Double.parseDouble(input.nextLine());
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 

@@ -1,6 +1,6 @@
-package model.modelClass;
+package model.classModel;
 
-import model.modelInterface.CalculateTheAmount;
+import model.interfaceModel.CalculateTheAmount;
 
 import java.io.Serializable;
 

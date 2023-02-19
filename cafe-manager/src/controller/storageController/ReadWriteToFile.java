@@ -1,7 +1,7 @@
 package controller.storageController;
 
-import model.modelClass.Client;
-import model.modelClass.Person;
+import model.classModel.Client;
+import model.classModel.Person;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class ReadWriteToFile implements ReadWrite{
     }
     @Override
     public void writeToFileClient(List<Client> clients) {
-        File file = new File("client.dat");
+        File file = new File("readWriteFile/client.dat");
         FileOutputStream stream;
         try {
             stream = new FileOutputStream(file);
@@ -44,7 +44,7 @@ public class ReadWriteToFile implements ReadWrite{
     }
     @Override
     public List<Client> readDataFileClient() {
-        File file = new File("client.dat");
+        File file = new File("readWriteFile/client.dat");
         List<Client> clients = new ArrayList<>();
         FileInputStream stream;
         try {
@@ -67,7 +67,7 @@ public class ReadWriteToFile implements ReadWrite{
     //Employees-------------------------------------------------------------------------------------------------
     @Override
     public void writeToFileEmployees(List<Person> employees) {
-        File file = new File("employee.dat");
+        File file = new File("readWriteFile/employee.dat");
         FileOutputStream stream;
         try {
             stream = new FileOutputStream(file);
@@ -90,7 +90,7 @@ public class ReadWriteToFile implements ReadWrite{
     }
     @Override
     public List<Person> readDataFileEmployees() {
-        File file = new File("employee.dat");
+        File file = new File("readWriteFile/employee.dat");
         List<Person> employees = new ArrayList<>();
         FileInputStream stream;
         try {
@@ -108,5 +108,50 @@ public class ReadWriteToFile implements ReadWrite{
             System.err.println("Không đọc được dữ liệu");
         }
         return employees;
+    }
+
+    @Override
+    public void writeToFileInvoiceHistory(List<Client> clients) {
+        File file = new File("readWriteFile/invoiceHistory.dat");
+        FileOutputStream stream;
+        try {
+            stream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedOutputStream bufSt = new BufferedOutputStream(stream);
+            ObjectOutputStream oos = new ObjectOutputStream(bufSt);
+            oos.writeObject(clients);
+            oos.close();
+        } catch (IOException e) {
+            System.err.println("Không ghi được file");
+        }
+        try {
+            stream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Override
+    public List<Client> readDataFileInvoiceHistory() {
+        File file = new File("readWriteFile/invoiceHistory.dat");
+        List<Client> clients = new ArrayList<>();
+        FileInputStream stream;
+        try {
+            stream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedInputStream bufInSt = new BufferedInputStream(stream);
+            ObjectInputStream ois = new ObjectInputStream(bufInSt);
+            clients = (List<Client>) ois.readObject();
+            ois.close();
+            stream.close();
+        } catch (Exception ex) {
+            System.err.println("Không đọc được dữ liệu");
+        }
+        return clients;
     }
 }

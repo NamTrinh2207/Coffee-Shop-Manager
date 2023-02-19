@@ -1,6 +1,6 @@
-package model.modelClass;
+package model.classModel;
 
-import model.modelInterface.RealFieldEmployee;
+import model.interfaceModel.RealFieldEmployee;
 
 public class FullTimeEmployee extends Person implements RealFieldEmployee {
     private String email;

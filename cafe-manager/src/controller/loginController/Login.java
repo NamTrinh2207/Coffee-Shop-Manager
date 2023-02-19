@@ -1,8 +1,8 @@
 package controller.loginController;
 
 import controller.managerController.Manager;
-import model.modelClass.LoginModel;
-import model.modelClass.Person;
+import model.classModel.LoginModel;
+import model.classModel.Person;
 
 public class Login {
     private views.Login view;

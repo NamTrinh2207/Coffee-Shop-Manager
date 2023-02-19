@@ -1,5 +1,5 @@
 package views;
-import model.modelClass.LoginModel;
+import model.classModel.LoginModel;
 import java.util.Scanner;
 public class Login {
     public Scanner input = new Scanner(System.in);

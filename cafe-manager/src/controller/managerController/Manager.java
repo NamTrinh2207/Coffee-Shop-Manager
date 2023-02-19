@@ -1,12 +1,13 @@
 package controller.managerController;
 
-import model.modelClass.Client;
-import model.modelClass.FullTimeEmployee;
-import model.modelClass.PartTimeEmployee;
-import model.modelClass.Person;
+import model.classModel.Client;
+import model.classModel.FullTimeEmployee;
+import model.classModel.PartTimeEmployee;
+import model.classModel.Person;
 import controller.storageController.ReadWrite;
 import controller.storageController.ReadWriteToFile;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -17,10 +18,12 @@ public class Manager {
     private static Manager instance;
     private final ReadWrite readWrite = ReadWriteToFile.getInstance();
     private final List<Client> clients;
+    private final List<Client> invoiceHistory;
     private final List<Person> employees;
 
     private Manager() {
         this.clients = readWrite.readDataFileClient();
+        this.invoiceHistory = readWrite.readDataFileInvoiceHistory();
         this.employees = readWrite.readDataFileEmployees();
     }
 
@@ -39,6 +42,10 @@ public class Manager {
         return employees;
     }
 
+    public List<Client> getInvoiceHistory() {
+        return invoiceHistory;
+    }
+
     //CRUD Client------------------------------------------------------------------------------------
     public void addNewClient(Client client) {
         clients.add(client);
@@ -51,8 +58,14 @@ public class Manager {
     }
 
     public void displayClients() {
-        for (Client o : clients) {
-            System.out.println(o);
+        for (Client client : clients) {
+            System.out.println(client);
+        }
+    }
+
+    public void displayInvoiceHistory() {
+        for (Client invoiceHistory : invoiceHistory) {
+            System.out.println(invoiceHistory);
         }
     }
 
@@ -73,6 +86,11 @@ public class Manager {
         return "id bạn nhập không có trong danh sách";
     }
 
+    public void deleteInvoiceHistory() {
+        invoiceHistory.clear();
+        readWrite.writeToFileInvoiceHistory(invoiceHistory);
+    }
+
     public String totalBillAmount(String id) {
         StringBuilder sb = new StringBuilder();
         double sum;
@@ -82,6 +100,8 @@ public class Manager {
                 sb.append("Khách hàng: ").append(p.getName()).append("\nTổng tiền : ").
                         append((long) sum).append(" VNĐ");
                 if (!clients.isEmpty()) {
+                    invoiceHistory.add(p);
+                    readWrite.writeToFileInvoiceHistory(invoiceHistory);
                     clients.remove(p);
                     readWrite.writeToFileClient(clients);
                 }

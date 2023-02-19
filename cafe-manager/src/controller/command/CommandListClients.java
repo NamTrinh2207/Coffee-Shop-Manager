@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.modelClass.Client;
+import model.classModel.Client;
 
 import java.util.List;
 

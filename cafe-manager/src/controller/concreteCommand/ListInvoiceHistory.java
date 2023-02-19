@@ -6,14 +6,15 @@ import model.classModel.Client;
 
 import java.util.List;
 
-public class ListClients implements CommandListClients {
-    Manager controllerManager;
+public class ListInvoiceHistory implements CommandListClients {
+    Manager manager;
 
-    public ListClients(Manager controllerManager) {
-        this.controllerManager = controllerManager;
+    public ListInvoiceHistory(Manager manager) {
+        this.manager = manager;
     }
+
     @Override
     public List<Client> execute() {
-        return controllerManager.getClients();
+        return manager.getInvoiceHistory();
     }
 }

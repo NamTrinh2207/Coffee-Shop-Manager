@@ -1,4 +1,4 @@
-package model.modelClass;
+package model.classModel;
 
 public class PartTimeEmployee extends Person {
     private double workingTimes;

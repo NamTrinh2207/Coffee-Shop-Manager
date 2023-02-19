@@ -1,13 +1,14 @@
 package views.invoker;
 
 import controller.command.*;
-import model.modelClass.Client;
-import model.modelClass.Person;
+import model.classModel.Client;
+import model.classModel.Person;
 
 import java.util.List;
 
 public class CoffeeApp {
     private CommandListClients clients;
+    private CommandListClients listInvoiceHistory;
     private CommandListEmployees employees;
     private CommandAddClients addClients;
     private CommandAddEmployee addEmployees;
@@ -17,20 +18,25 @@ public class CoffeeApp {
     private CommandStringDataType salaryFullTime;
     private CommandStringDataType salaryPartTime;
     private CommandVoidDataType sortClient;
+    private CommandVoidDataType displayInvoiceHistory;
     private CommandVoidDataType sortNameEmployees;
     private CommandStringDataType totalMoney;
     private CommandTotalEmployeeSalary totalSalaryAllEmployees;
     private CommandEditEmployees editEmployees;
+    private CommandVoidDataType deleteInvoiceHistory;
 
     public CoffeeApp() {
     }
 
-    public CoffeeApp(CommandListClients clients, CommandListEmployees employees, CommandAddClients addClients, CommandAddEmployee addEmployees,
-                     CommandStringDataType deleteByEmployee, CommandVoidDataType displayClient, CommandVoidDataType displayEmployee,
+    public CoffeeApp(CommandListClients clients, CommandListClients listInvoiceHistory, CommandListEmployees employees,
+                     CommandAddClients addClients, CommandAddEmployee addEmployees, CommandStringDataType deleteByEmployee,
+                     CommandVoidDataType displayClient, CommandVoidDataType displayEmployee,
                      CommandStringDataType salaryFullTime, CommandStringDataType salaryPartTime, CommandVoidDataType sortClient,
                      CommandVoidDataType sortNameEmployees, CommandStringDataType totalMoney, CommandTotalEmployeeSalary
-                           totalSalaryAllEmployees,CommandEditEmployees editEmployees) {
+                             totalSalaryAllEmployees, CommandEditEmployees editEmployees,
+                     CommandVoidDataType displayInvoiceHistory, CommandVoidDataType deleteInvoiceHistory) {
         this.clients = clients;
+        this.listInvoiceHistory = listInvoiceHistory;
         this.employees = employees;
         this.addClients = addClients;
         this.addEmployees = addEmployees;
@@ -44,11 +50,16 @@ public class CoffeeApp {
         this.totalMoney = totalMoney;
         this.totalSalaryAllEmployees = totalSalaryAllEmployees;
         this.editEmployees = editEmployees;
-
+        this.displayInvoiceHistory = displayInvoiceHistory;
+        this.deleteInvoiceHistory = deleteInvoiceHistory;
     }
 
     public List<Client> listClients() {
         return clients.execute();
+    }
+
+    public List<Client> listInvoiceHistory() {
+        return listInvoiceHistory.execute();
     }
 
     public List<Person> listEmployees() {
@@ -69,6 +80,10 @@ public class CoffeeApp {
 
     public void displayClient() {
         displayClient.execute();
+    }
+
+    public void displayInvoiceHistory() {
+        displayInvoiceHistory.execute();
     }
 
     public void displayEmployee() {
@@ -98,8 +113,12 @@ public class CoffeeApp {
     public void salaryPartTime(String id) {
         System.out.println(salaryPartTime.execute(id));
     }
+
     public void editEmployee(Person employee, String id) {
-        editEmployees.execute(employee,id);
+        editEmployees.execute(employee, id);
+    }
+    public void deleteInvoiceHistory(){
+        deleteInvoiceHistory.execute();
     }
 
 

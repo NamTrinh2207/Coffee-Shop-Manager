@@ -2,7 +2,7 @@ package controller.concreteCommand;
 
 import controller.command.CommandEditEmployees;
 import controller.managerController.Manager;
-import model.modelClass.Person;
+import model.classModel.Person;
 
 public class EditEmployee implements CommandEditEmployees {
     Manager controllerManager;

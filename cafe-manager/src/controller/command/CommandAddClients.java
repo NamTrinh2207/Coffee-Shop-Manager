@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.modelClass.Client;
+import model.classModel.Client;
 
 public interface CommandAddClients {
     void execute(Client client);

@@ -1,4 +1,4 @@
-package model.modelClass;
+package model.classModel;
 
 import java.util.ArrayList;
 import java.util.List;

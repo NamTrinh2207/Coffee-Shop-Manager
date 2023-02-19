@@ -2,7 +2,7 @@ package controller.concreteCommand;
 
 import controller.command.CommandAddClients;
 import controller.managerController.Manager;
-import model.modelClass.Client;
+import model.classModel.Client;
 
 public class AddNewClient implements CommandAddClients {
     Manager controllerManager;
