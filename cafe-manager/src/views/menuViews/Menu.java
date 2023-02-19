@@ -1,10 +1,11 @@
-package views;
+package views.menuViews;
 
 import controller.command.*;
 import controller.command.CommandListClients;
 import controller.concreteCommand.*;
 import controller.managerController.Manager;
 import model.classModel.*;
+import views.loginViews.Login;
 import views.invoker.CoffeeApp;
 
 import java.util.ArrayList;

@@ -5,9 +5,9 @@ import model.classModel.LoginModel;
 import model.classModel.Person;
 
 public class Login {
-    private views.Login view;
+    private views.loginViews.Login view;
 
-    public Login(views.Login view) {
+    public Login(views.loginViews.Login view) {
         this.view = view;
     }
 
@@ -28,11 +28,11 @@ public class Login {
         return (user.getUser().equals("admin")) && (user.getPass().equals("123"));
     }
 
-    public views.Login getView() {
+    public views.loginViews.Login getView() {
         return view;
     }
 
-    public void setView(views.Login view) {
+    public void setView(views.loginViews.Login view) {
         this.view = view;
     }
 

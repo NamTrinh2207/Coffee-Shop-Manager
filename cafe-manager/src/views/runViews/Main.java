@@ -1,5 +1,8 @@
-package views;
-public class Run {
+package views.runViews;
+
+import views.menuViews.Menu;
+
+public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.clubCoffee();

@@ -1,4 +1,4 @@
-package views;
+package views.loginViews;
 import model.classModel.LoginModel;
 import java.util.Scanner;
 public class Login {
