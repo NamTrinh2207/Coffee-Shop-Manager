@@ -107,7 +107,7 @@ public class Menu {
                     +--------------- QUẢN LÝ HÓA ĐƠN ---------------+
                     |    1. Thêm hóa đơn mới                        |
                     |    2. Danh sách hóa đơn                       |
-                    |    3. Tính tiền theo id khách hàng            |
+                    |    3. Tính tiền hóa đơn theo id khách hàng    |
                     |    4. Sắp xếp hóa đơn theo tên khách hàng     |
                     |    5. Lịch sử hóa đơn mua hàng                |
                     |    6. Xóa toàn bộ lịch sử hóa đơn mua hàng    |
@@ -156,7 +156,7 @@ public class Menu {
         showMessage("Nhập địa chỉ:");
         String address = string();
         String phone = checkInputPhoneNumber();
-        showMessage("Nhập số lượng cà phê khách hàng mua:");
+        showMessage("Nhập số loại cà phê khách hàng mua:");
         int sp = checkInt();
         List<Product> products = new ArrayList<>();
         for (int i = 1; i <= sp; i++) {
