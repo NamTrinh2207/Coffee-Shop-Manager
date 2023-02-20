@@ -25,7 +25,7 @@ public class Login {
     }
 
     private boolean checkAdmin(LoginModel user) {
-        return (user.getUser().equals("admin")) && (user.getPass().equals("123"));
+        return (user.getUser().equals("admin")) && (user.getPass().equals("********"));
     }
 
     public views.loginViews.Login getView() {

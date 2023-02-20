@@ -326,7 +326,7 @@ public class Menu {
             double newHardSalary;
             Person employee;
             showMessage("Mời bạn nhập vào id nhân viên: ");
-            String id = string();
+            String id = checkIdIsTheSame();
             for (Person e : menu.listEmployees()) {
                 if (id.equals(e.getId())) {
                     if (e instanceof FullTimeEmployee) {
@@ -356,7 +356,6 @@ public class Menu {
                         menu.editEmployee(employee, id);
                     }
                 }
-
             }
         }
     }
@@ -421,6 +420,17 @@ public class Menu {
             }
         }
         return id;
+    }
+
+    public String checkIdIsTheSame() {
+        String id = string();
+        for (Person o : Manager.getInstance().getEmployees()) {
+                if (o.getId().equals(id)) {
+                    return id;
+                }
+            }
+        showMessageErr("Id bạn nhập không có trong danh sách! Nhập lại:");
+        return checkIdIsTheSame();
     }
 
     //check input-------------------------------------------------------------------------------------------------
